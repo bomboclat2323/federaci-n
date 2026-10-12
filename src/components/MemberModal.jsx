@@ -31,7 +31,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     if (!loginId || !loginPassword) {
-      setLoginError('[Chyba: Prosím zadejte Vaše členské číslo / IČO a heslo]');
+      setLoginError('Prosím zadejte Vaše identifikační číslo (KRS / IČO) a heslo.');
       return;
     }
     setLoginError('');
@@ -41,7 +41,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
   const handleApplySubmit = (e) => {
     e.preventDefault();
     if (!formData.orgName || !formData.ico || !formData.email || !formData.agreement) {
-      alert('[Upozornění: Vyplňte prosím všechna povinná pole a potvrďte souhlas se stanovami.]');
+      alert('Vyplňte prosím všechna povinná pole a potvrďte souhlas se stanovami federace CFOP.');
       return;
     }
     // Generate mock application registration code
@@ -124,14 +124,14 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <h4 className="text-lg font-bold text-slate-900">
-                    [Úspěšné ověření člena]
+                    Úspěšné ověření člena
                   </h4>
                   <p className="text-sm text-slate-600 max-w-xs mx-auto">
-                    [Vítejte v neveřejné klientské zóně federace. Máte přístup k interním zápisům, hlasovacím materiálům a legislativním formulářům.]
+                    Vítejte v neveřejné klientské zóně federace CFOP. Máte přístup k interním zápisům, hlasovacím materiálům a formulářům.
                   </p>
                   <div className="p-3 bg-slate-100 rounded-lg text-xs text-slate-700 text-left font-mono">
-                    <div>Subjekt: [Autorizovaný zástupce organizace]</div>
-                    <div>Stav účtu: [Aktivní člen s hlasovacím právem]</div>
+                    <div>Subjekt: Autorizovaný zástupce organizace</div>
+                    <div>Stav účtu: Aktivní člen s hlasovacím právem</div>
                   </div>
                   <button
                     type="button"
@@ -147,7 +147,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
               ) : (
                 <form onSubmit={handleLoginSubmit} className="space-y-4">
                   <div className="bg-blue-50 border border-blue-200/60 p-3 rounded-lg text-xs text-blue-900 leading-relaxed">
-                    [Zde se přihlašují statutární zástupci a pověřené osoby řádných a přidružených členských subjektů federace.]
+                    Zde se přihlašují statutární zástupci a pověřené osoby řádných a přidružených členských subjektů federace CFOP.
                   </div>
 
                   {loginError && (
@@ -159,7 +159,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
 
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                      Členské číslo nebo IČO subjektu *
+                      Členské číslo nebo KRS / IČO subjektu *
                     </label>
                     <div className="relative">
                       <Building className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
@@ -168,7 +168,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
                         required
                         value={loginId}
                         onChange={(e) => setLoginId(e.target.value)}
-                        placeholder="[Zadejte např. IČO 12345678]"
+                        placeholder="Zadejte např. KRS / IČO 0000547004"
                         className="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:outline-none"
                       />
                     </div>
@@ -197,7 +197,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
                       <span>Pamatovat přihlášení</span>
                     </label>
                     <span className="text-blue-900 hover:underline cursor-pointer">
-                      [Zapomenuté heslo / Obnova přístupu]
+                      Zapomenuté heslo / Obnova přístupu
                     </span>
                   </div>
 
@@ -232,16 +232,16 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <h4 className="text-lg font-bold text-slate-900">
-                    [Žádost o členství byla úspěšně zaevidována]
+                    Žádost o členství byla úspěšně zaevidována
                   </h4>
                   <div className="p-3 bg-slate-100 rounded-lg text-xs text-slate-800 space-y-1 font-mono text-left">
                     <div>Evidenční kód žádosti: <strong className="text-blue-900">{applicationNumber}</strong></div>
                     <div>Organizace: {formData.orgName}</div>
-                    <div>IČO: {formData.ico}</div>
-                    <div>Lhůta pro vyřízení: [Do 30 dnů kanceláří tajemníka]</div>
+                    <div>Identifikátor (IČO/KRS): {formData.ico}</div>
+                    <div>Lhůta pro vyřízení: Do 30 dnů sekretariátem CFOP</div>
                   </div>
                   <p className="text-xs text-slate-600">
-                    [Potvrzení spolu s podrobnými pokyny k doložení stanov a výpisu z rejstříku bylo odesláno na uvedený e-mail {formData.email}.]
+                    Potvrzení spolu s podrobnými pokyny k doložení stanov a výpisu z rejstříku bylo odesláno na uvedený e-mail {formData.email}.
                   </p>
                   <button
                     type="button"
@@ -254,7 +254,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
               ) : (
                 <form onSubmit={handleApplySubmit} className="space-y-3.5">
                   <div className="bg-amber-50 border border-amber-200/60 p-3 rounded-lg text-xs text-amber-900 leading-relaxed">
-                    [Formální formulář pro právnické osoby a spolky usilující o řádné nebo přidružené členství.]
+                    Formální formulář pro nestátní neziskové organizace a sociální podniky usilující o řádné nebo přidružené členství ve federaci CFOP.
                   </div>
 
                   <div>
@@ -266,7 +266,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
                       required
                       value={formData.orgName}
                       onChange={(e) => setFormData({...formData, orgName: e.target.value})}
-                      placeholder="[např. Asociace pro rozvoj oboru, z.s.]"
+                      placeholder="např. Spolek pro rozvoj komunit, z.s."
                       className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     />
                   </div>
@@ -274,14 +274,14 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                        IČO subjektu *
+                        IČO / KRS subjektu *
                       </label>
                       <input
                         type="text"
                         required
                         value={formData.ico}
                         onChange={(e) => setFormData({...formData, ico: e.target.value})}
-                        placeholder="[např. 12345678]"
+                        placeholder="např. 12345678 nebo KRS 0000123456"
                         className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:outline-none"
                       />
                     </div>
@@ -294,8 +294,8 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
                         onChange={(e) => setFormData({...formData, membershipType: e.target.value})}
                         className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:outline-none bg-white"
                       >
-                        <option value="radny">[Řádný člen s hlasovacím právem]</option>
-                        <option value="pridruzeny">[Přidružený člen / Partner]</option>
+                        <option value="radny">Řádný člen s hlasovacím právem</option>
+                        <option value="pridruzeny">Přidružený člen / Partner</option>
                       </select>
                     </div>
                   </div>
@@ -310,7 +310,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        placeholder="[kancelar@organizace.cz]"
+                        placeholder="kancelar@organizace.cz"
                         className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:outline-none"
                       />
                     </div>
@@ -322,7 +322,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        placeholder="+420 123 456 789"
+                        placeholder="+48 608 000 000 / +420 777 000 000"
                         className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:outline-none"
                       />
                     </div>
@@ -336,7 +336,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
                       type="text"
                       value={formData.representative}
                       onChange={(e) => setFormData({...formData, representative: e.target.value})}
-                      placeholder="[Titul, Jméno a Příjmení předsedy / ředitele]"
+                      placeholder="Titul, Jméno a Příjmení předsedy / ředitele"
                       className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     />
                   </div>
@@ -351,7 +351,7 @@ export default function MemberModal({ isOpen, onClose, defaultTab = 'login' }) {
                         className="mt-0.5 rounded text-blue-900 focus:ring-blue-900"
                       />
                       <span>
-                        [Potvrzuji seznámení se stanovami federace a beru na vědomí povinnost doložit ověřené stanovy žadatele.]
+                        Potvrzuji seznámení se stanovami federace CFOP a beru na vědomí povinnost doložit ověřené stanovy žadatele.
                       </span>
                     </label>
                   </div>

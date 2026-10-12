@@ -2,13 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Building2, 
-  Mail, 
-  Phone, 
   MapPin, 
-  ShieldCheck, 
-  FileText, 
-  ExternalLink,
-  CreditCard,
+  Mail, 
+  Phone,
   Lock,
   ChevronRight
 } from 'lucide-react';
@@ -16,19 +12,19 @@ import { FEDERATION_INFO } from '../data/federationData';
 
 export default function Footer({ onOpenMemberModal }) {
   return (
-    <footer className="bg-slate-950 text-slate-300 pt-16 pb-12 border-t-4 border-blue-900 mt-auto">
+    <footer className="bg-slate-900 text-slate-400 pt-14 pb-10 border-t border-slate-800 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Grid: 4 Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+        {/* Main Grid: 4 Clean Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
           
-          {/* Col 1: Legal Identity & Summary */}
-          <div className="space-y-4 lg:col-span-1">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-blue-900/60 border border-blue-700/50 flex items-center justify-center text-white">
-                <Building2 className="w-5 h-5 text-blue-300" />
+          {/* Col 1: Identity */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-md bg-slate-800 flex items-center justify-center text-white">
+                <Building2 className="w-4 h-4 text-slate-300" />
               </div>
-              <span className="font-bold text-white tracking-tight text-base">
+              <span className="font-bold text-white text-sm tracking-tight">
                 {FEDERATION_INFO.name}
               </span>
             </div>
@@ -37,16 +33,10 @@ export default function Footer({ onOpenMemberModal }) {
               {FEDERATION_INFO.legalName}
             </p>
             
-            <div className="text-xs text-slate-400 space-y-1.5 pt-1">
-              <div className="flex items-start gap-2">
-                <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                <span>{FEDERATION_INFO.ico}</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                <span>{FEDERATION_INFO.dic}</span>
-              </div>
-              <p className="text-[11px] text-slate-500 leading-normal pt-1">
+            <div className="text-xs text-slate-500 space-y-1 pt-1">
+              <p>KRS: {FEDERATION_INFO.krs}</p>
+              <p>NIP: {FEDERATION_INFO.nip} · REGON: {FEDERATION_INFO.regon}</p>
+              <p className="text-[11px] text-slate-500 pt-1">
                 {FEDERATION_INFO.registryInfo}
               </p>
             </div>
@@ -54,116 +44,98 @@ export default function Footer({ onOpenMemberModal }) {
 
           {/* Col 2: Navigation Links */}
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-              Navigace portálu
+            <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-3">
+              Navigace
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
-                  <ChevronRight className="w-3.5 h-3.5 text-blue-400" />
+                <Link to="/" className="hover:text-white transition-colors">
                   Úvodní stránka
                 </Link>
               </li>
               <li>
-                <Link to="/o-federaci" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
-                  <ChevronRight className="w-3.5 h-3.5 text-blue-400" />
+                <Link to="/o-federaci" className="hover:text-white transition-colors">
                   O federaci a struktura
                 </Link>
               </li>
               <li>
-                <Link to="/clenove" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
-                  <ChevronRight className="w-3.5 h-3.5 text-blue-400" />
-                  Seznam členských organizací
+                <Link to="/clenove" className="hover:text-white transition-colors">
+                  Členské organizace
                 </Link>
               </li>
               <li>
-                <Link to="/dokumenty" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
-                  <ChevronRight className="w-3.5 h-3.5 text-blue-400" />
-                  Oficiální dokumenty a stanovy
+                <Link to="/dokumenty" className="hover:text-white transition-colors">
+                  Oficiální dokumenty
                 </Link>
               </li>
               <li>
-                <Link to="/aktuality" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
-                  <ChevronRight className="w-3.5 h-3.5 text-blue-400" />
-                  Aktuality a tiskové zprávy
+                <Link to="/aktuality" className="hover:text-white transition-colors">
+                  Aktuality a komuniké
                 </Link>
               </li>
               <li>
-                <Link to="/kontakt" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
-                  <ChevronRight className="w-3.5 h-3.5 text-blue-400" />
-                  Sídlo a kontakty
+                <Link to="/kontakt" className="hover:text-white transition-colors">
+                  Kontakt a sídlo
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Documents, Transparency & GDPR */}
+          {/* Col 3: Documents & Transparency */}
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-              Transparentnost a řády
+            <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-3">
+              Dokumenty
             </h4>
-            <ul className="space-y-2.5 text-xs text-slate-400">
+            <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/dokumenty" className="hover:text-blue-300 transition-colors flex items-center gap-2">
-                  <FileText className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                  <span>[Stanovy federace (platné znění)]</span>
+                <Link to="/dokumenty" className="hover:text-white transition-colors">
+                  Stanovy federace CFOP
                 </Link>
               </li>
               <li>
-                <Link to="/dokumenty" className="hover:text-blue-300 transition-colors flex items-center gap-2">
-                  <FileText className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                  <span>[Jednací řád a volební řád]</span>
+                <Link to="/dokumenty" className="hover:text-white transition-colors">
+                  Jednací a volební řád
                 </Link>
               </li>
               <li>
-                <Link to="/dokumenty" className="hover:text-blue-300 transition-colors flex items-center gap-2">
-                  <FileText className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                  <span>[Zápisy z valné hromady]</span>
+                <Link to="/dokumenty" className="hover:text-white transition-colors">
+                  Výroční zprávy a hospodaření
                 </Link>
               </li>
-              <li>
-                <Link to="/dokumenty" className="hover:text-blue-300 transition-colors flex items-center gap-2">
-                  <FileText className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                  <span>[Výroční zpráva a hospodaření]</span>
-                </Link>
-              </li>
-              <li className="pt-2 border-t border-slate-800/80">
-                <span className="text-slate-300 font-medium block mb-1">
-                  [Ochrana osobních údajů a GDPR]
-                </span>
-                <span className="text-[11px] text-slate-500 leading-relaxed block">
-                  [Zpracování probíhá striktně v souladu s Nařízením EP a Rady EU 2016/679 (GDPR).]
+              <li className="pt-2">
+                <span className="text-[11px] text-slate-500 block leading-relaxed">
+                  Zpracování osobních údajů probíhá v souladu s nařízením GDPR (EU 2016/679).
                 </span>
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Official Headquarters & Banking */}
+          {/* Col 4: Contact & Secretariat */}
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-              Oficiální sídlo a spojení
+            <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-3">
+              Sekretariát
             </h4>
-            <div className="space-y-3 text-xs text-slate-400">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+            <div className="space-y-2 text-xs text-slate-400">
+              <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" />
                 <span>{FEDERATION_INFO.address}</span>
               </div>
-              <div className="flex items-start gap-2.5">
-                <CreditCard className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                <span>{FEDERATION_INFO.bankAccount}</span>
+              <div className="flex items-center gap-2">
+                <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                <span>+48 608 031 289</span>
               </div>
-              <div className="flex items-start gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                <span>{FEDERATION_INFO.datovaSchranka}</span>
+              <div className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                <span>cfoppes@gmail.com</span>
               </div>
-              <div className="pt-3">
+              <div className="pt-2">
                 <button
                   type="button"
                   onClick={onOpenMemberModal}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-blue-200 border border-slate-700/80 px-3.5 py-2 rounded-lg font-medium text-xs transition-colors"
+                  className="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-md text-xs font-medium transition-colors"
                 >
-                  <Lock className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Klientská zóna / Přihlášení</span>
+                  <Lock className="w-3 h-3" />
+                  <span>Členská zóna</span>
                 </button>
               </div>
             </div>
@@ -171,26 +143,19 @@ export default function Footer({ onOpenMemberModal }) {
 
         </div>
 
-        {/* Bottom Bar: Copyright and Mandatory Legal Footer */}
-        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+        {/* Bottom Bar: Clean & Minimal */}
+        <div className="pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[11px] text-slate-500">
           <div>
             <p>© 2026 {FEDERATION_INFO.name}. Všechna práva vyhrazena.</p>
-            <p className="text-[11px] text-slate-600 mt-0.5">
-              [Oficiální internetová prezentace svazu — vytvořeno v souladu s právním řádem ČR]
-            </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-5 text-xs text-slate-400">
+          <div className="flex items-center gap-4 text-slate-400">
             <Link to="/dokumenty" className="hover:text-white transition-colors">
-              [Stanovy federace]
+              Stanovy federace
             </Link>
             <span>•</span>
-            <span className="hover:text-white cursor-pointer" title="Zásady GDPR">
-              [Zásady ochrany osobních údajů (GDPR)]
-            </span>
-            <span>•</span>
-            <span className="hover:text-white cursor-pointer" title="Mapa stránek portálu">
-              [Mapa stránek portálu]
+            <span className="hover:text-white cursor-pointer">
+              Ochrana osobních údajů
             </span>
           </div>
         </div>

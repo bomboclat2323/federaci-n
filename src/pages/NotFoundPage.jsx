@@ -17,7 +17,7 @@ export default function NotFoundPage() {
             Stránka nebyla nalezena
           </h1>
           <p className="text-xs text-slate-500 mt-2 leading-relaxed">
-            [Požadovaný dokument nebo stránka oficiálního portálu {FEDERATION_INFO.name} neexistuje nebo byla přesunuta do archivu.]
+            Požadovaný dokument nebo stránka oficiálního portálu {FEDERATION_INFO.name} neexistuje nebo byla přesunuta do archivu.
           </p>
         </div>
 

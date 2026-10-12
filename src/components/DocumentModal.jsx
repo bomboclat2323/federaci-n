@@ -11,7 +11,7 @@ export default function DocumentModal({ document, isOpen, onClose }) {
     setDownloaded(true);
     setTimeout(() => {
       // Simulate download feedback
-      alert(`[Oficiální dokument "${document.title}" byl připraven k exportu a stažení v elektronické podobě.]`);
+      alert(`Oficiální dokument "${document.title}" byl připraven k exportu a stažení v elektronické podobě.`);
     }, 400);
   };
 
@@ -94,7 +94,7 @@ export default function DocumentModal({ document, isOpen, onClose }) {
           </div>
 
           <div className="bg-amber-50/80 border border-amber-200 text-amber-900 p-3 rounded-lg text-xs leading-relaxed">
-            [Upozornění pro vedení: Tento dokument představuje právně závazný vnitřní předpis federace. Elektronicky podepsáno certifikátem statutárního zástupce.]
+            Platný vnitřní předpis federace CFOP. Dokument je archivován v elektronické spisové službě organizace.
           </div>
 
           {/* Action buttons */}
@@ -107,7 +107,7 @@ export default function DocumentModal({ document, isOpen, onClose }) {
               {downloaded ? (
                 <>
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span>[Dokument stažen do zařízení]</span>
+                  <span>Dokument stažen do zařízení</span>
                 </>
               ) : (
                 <>

@@ -4,9 +4,9 @@ import { ChevronRight, Home } from 'lucide-react';
 
 export default function Breadcrumbs({ items = [] }) {
   return (
-    <nav className="bg-slate-100/80 border-b border-slate-200 py-2.5 px-4 sm:px-6 lg:px-8 text-xs text-slate-600">
+    <nav className="bg-white border-b border-slate-100 py-2.5 px-4 sm:px-6 lg:px-8 text-xs text-slate-500">
       <div className="max-w-7xl mx-auto flex items-center flex-wrap gap-1.5">
-        <Link to="/" className="flex items-center gap-1 hover:text-blue-900 transition-colors text-slate-500 font-medium">
+        <Link to="/" className="flex items-center gap-1 hover:text-slate-900 transition-colors text-slate-500 font-medium">
           <Home className="w-3.5 h-3.5" />
           <span>Úvod</span>
         </Link>

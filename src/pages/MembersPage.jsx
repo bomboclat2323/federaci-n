@@ -58,17 +58,17 @@ export default function MembersPage({ onOpenMemberModal, onSelectDoc }) {
       <Breadcrumbs items={breadcrumbItems} />
 
       {/* Page Header */}
-      <section className="bg-slate-900 text-white py-14 border-b border-slate-800">
+      <section className="bg-white py-12 lg:py-16 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-xs font-bold text-blue-300 uppercase tracking-wider bg-blue-900/60 px-3 py-1 rounded-full">
+          <div className="max-w-3xl text-left">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               Členská základna a partneři
             </span>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white mt-3 mb-4 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mt-1 mb-3 tracking-tight">
               Seznam členských organizací a partnerů
             </h1>
-            <p className="text-slate-300 text-base leading-relaxed">
-              [Podmínky členství a přehled subjektů, které jsou součástí naší federace.]
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Podmínky členství a přehled neziskových organizací a sociálních podniků sdružených ve federaci CFOP.
             </p>
           </div>
         </div>
@@ -227,10 +227,10 @@ export default function MembersPage({ onOpenMemberModal, onSelectDoc }) {
               Podmínky a proces přijetí
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-3 mb-3">
-              Jak se stát členem naší federace?
+              Jak se stát členem federace CFOP?
             </h2>
             <p className="text-slate-600 text-sm leading-relaxed">
-              [Formální proces přijímání nových subjektů do svazu probíhá transparentně v souladu s článkem IV stanov federace. Zde je přehled čtyř základních procedurálních kroků:]
+              Formální proces přijímání nových subjektů do federace CFOP probíhá transparentně v souladu se stanovami. Zde je přehled čtyř procedurálních kroků:
             </p>
           </div>
 
@@ -255,30 +255,30 @@ export default function MembersPage({ onOpenMemberModal, onSelectDoc }) {
                 
                 <div className="mt-5 pt-3 border-t border-slate-200/60 flex items-center text-[11px] text-slate-500 font-medium">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mr-1.5" />
-                  <span>[Procedurální fáze dle stanov]</span>
+                  <span>Procedurální fáze dle stanov federace</span>
                 </div>
               </div>
             ))}
           </div>
 
           {/* CTA Box for Action */}
-          <div className="mt-14 bg-gradient-to-r from-blue-950 to-slate-900 text-white rounded-2xl p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="mt-12 bg-slate-900 text-white rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 text-left">
             <div>
-              <h3 className="text-xl font-bold text-white mb-1">
+              <h3 className="text-lg font-bold text-white mb-1">
                 Máte zájem o členství v naší federaci?
               </h3>
               <p className="text-xs text-slate-300">
-                [Stáhněte si oficiální formulář přihlášky nebo vyplňte online žádost pro kancelář tajemníka.]
+                Stáhněte si oficiální formulář přihlášky nebo vyplňte online žádost pro sekretariát federace CFOP.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2.5">
               <button
                 type="button"
                 onClick={onOpenMemberModal}
-                className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-2.5 rounded-lg text-xs shadow transition-colors flex items-center gap-2 cursor-pointer"
+                className="bg-white hover:bg-slate-100 text-slate-900 font-medium px-4 py-2.5 rounded-lg text-xs transition-colors flex items-center gap-2 cursor-pointer"
               >
-                <UserPlus className="w-4 h-4" />
+                <UserPlus className="w-3.5 h-3.5" />
                 <span>Vyplnit online přihlášku</span>
               </button>
 
@@ -286,9 +286,9 @@ export default function MembersPage({ onOpenMemberModal, onSelectDoc }) {
                 <button
                   type="button"
                   onClick={() => onSelectDoc(applicationDoc)}
-                  className="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold px-5 py-2.5 rounded-lg text-xs border border-slate-700 transition-colors flex items-center gap-2 cursor-pointer"
+                  className="bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium px-4 py-2.5 rounded-lg text-xs border border-slate-700 transition-colors flex items-center gap-2 cursor-pointer"
                 >
-                  <FileText className="w-4 h-4 text-blue-300" />
+                  <FileText className="w-3.5 h-3.5 text-slate-400" />
                   <span>Stáhnout formulář přihlášky (PDF)</span>
                 </button>
               )}

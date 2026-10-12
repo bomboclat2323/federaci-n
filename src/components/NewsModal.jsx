@@ -63,8 +63,8 @@ export default function NewsModal({ article, isOpen, onClose }) {
               {article.content}
             </p>
             <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs text-slate-600">
-              <strong className="text-slate-900 block mb-1">[Pokyn pro tisk a média]:</strong>
-              Veškeré citace statutárních zástupců a oficiální stanoviska podléhají autorizaci tiskového oddělení {FEDERATION_INFO.name}. Pro doplňující komentáře kontaktujte tiskového mluvčího.
+              <strong className="text-slate-900 block mb-1">Pokyn pro tisk a média:</strong>
+              Veškeré citace statutárních zástupců a oficiální stanoviska podléhají autorizaci tiskového oddělení {FEDERATION_INFO.name}. Pro doplňující komentáře kontaktujte sekretariát.
             </div>
           </div>
 
@@ -75,7 +75,7 @@ export default function NewsModal({ article, isOpen, onClose }) {
             </div>
             <button
               type="button"
-              onClick={() => alert('[Odkaz na oficiální sdělení byl zkopírován do schránky.]')}
+              onClick={() => alert('Odkaz na oficiální sdělení byl zkopírován do schránky.')}
               className="inline-flex items-center gap-1.5 text-blue-900 font-semibold hover:text-blue-950"
             >
               <Share2 className="w-4 h-4" />

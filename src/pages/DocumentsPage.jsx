@@ -52,17 +52,17 @@ export default function DocumentsPage({ onSelectDoc }) {
       <Breadcrumbs items={breadcrumbItems} />
 
       {/* Page Header */}
-      <section className="bg-slate-900 text-white py-14 border-b border-slate-800">
+      <section className="bg-white py-12 lg:py-16 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-xs font-bold text-blue-300 uppercase tracking-wider bg-blue-900/60 px-3 py-1 rounded-full">
+          <div className="max-w-3xl text-left">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               Sbírka listin a transparentnost
             </span>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white mt-3 mb-4 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mt-1 mb-3 tracking-tight">
               Oficiální dokumenty a stanovy ke stažení
             </h1>
-            <p className="text-slate-300 text-base leading-relaxed">
-              [Všechny základní organizační předpisy, jednací řády, výroční zprávy a usnesení valných hromad zveřejněné v souladu se zásadami otevřeného spolku.]
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Všechny základní organizační předpisy, jednací řády, výroční zprávy a usnesení valných shromáždění federace CFOP zveřejněné v souladu se zásadami transparentnosti.
             </p>
           </div>
         </div>
@@ -211,10 +211,10 @@ export default function DocumentsPage({ onSelectDoc }) {
           <ShieldCheck className="w-5 h-5 text-blue-900 shrink-0 mt-0.5" />
           <div className="space-y-1">
             <h4 className="font-bold text-xs uppercase tracking-wide">
-              [Doložka o transparentnosti a veřejné dostupnosti]
+              Doložka o transparentnosti a veřejné dostupnosti
             </h4>
             <p className="leading-relaxed">
-              [Veškeré výše uvedené dokumenty jsou v souladu se zákonem č. 89/2012 Sb., občanský zákoník, v platném znění řádně schváleny valnou hromadou a uloženy ve sbírce listin spolkového rejstříku vedeného Městským soudem v Praze. Členské subjekty mají právo nahlížet do originálů smluv v sídle sekretariátu.]
+              Veškeré výše uvedené dokumenty a výroční zprávy jsou řádně schváleny valnou hromadou a uloženy v souladu s právními předpisy v rejstříku spolků (KRS {FEDERATION_INFO.krs}, Sąd Rejonowy w Bielsku-Białej). Členské subjekty a partneři mají právo nahlížet do originálů smluv a usnesení v sídle sekretariátu ve městě Cieszyn.
             </p>
           </div>
         </div>
