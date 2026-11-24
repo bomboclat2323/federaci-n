@@ -1,16 +1,30 @@
-# React + Vite
+# CFOP Website (Cieszyn Federation of NGOs and Social Economy Entities)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Official repository for the **CFOP** (*Cieszyńska Federacja Organizacji Pozarządowych i Podmiotów Ekonomii Społecznej*) cross-border web portal.
 
-Currently, two official plugins are available:
+## Repository Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `wireframe/cfop_maqueta_10pct.html` — Stage 1 static structural wireframe (standalone HTML file, opens directly in any browser without a build step). Used to validate the 8-section site map and page hierarchy before writing the clean React production app.
+- `docs/` — Project documentation, planning, architecture notes, and client sign-off materials:
+  - `01_CLIENT_RESPONSE_EMAIL.md` — Project status summary and response notes.
+  - `02_PROJECT_ROADMAP_AND_STATUS.md` — Done vs. mocked vs. planned inventory and Milestone 1–5 schedule.
+  - `03_TECHNICAL_ARCHITECTURE.md` — Planned React + Vite + TypeScript stack, CMS, Extranet auth, `i18n`, forms, GDPR, and QA checks.
+  - `04_CONTENT_AND_AESTHETIC_QUESTIONNAIRE.md` — Content verification and visual direction questionnaire for CFOP.
+  - `analisis_webs_federaciones.pdf` — Audit of 20 Czech federation websites used to define the mandatory federation modules.
+- `legacy_archive/` — Archived early Czech React/Vite draft (`src/`, `package.json`, `index.html`, etc.), set aside so the production v1 codebase can be rebuilt cleanly from verified content and approved architecture.
 
-## React Compiler
+## Previewing the Stage 1 Wireframe
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Open `wireframe/cfop_maqueta_10pct.html` directly in any web browser (no Node server or dependencies required).
 
-## Expanding the Oxlint configuration
+## Planned Production Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **Frontend:** React + Vite + TypeScript (strict mode)
+- **Multilingual:** `react-i18next` (`PL`, `CZ`, `EN`)
+- **CMS:** Decap CMS or Sanity (for CFOP staff to manage news, events, members, and PDFs)
+- **Member Extranet:** Supabase Auth or Clerk with protected routes and signed document links
+- **Hosting & Forms:** Cloudflare Pages + Cloudflare Pages Functions (`Resend` + Turnstile)
+
+## Current Status
+
+We are in **Milestone 1** (documentation, architecture alignment, and official content/design verification via `docs/04_CONTENT_AND_AESTHETIC_QUESTIONNAIRE.md`). No placeholder metrics or unverified sample data will be carried into the production build.

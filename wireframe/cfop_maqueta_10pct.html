@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[WIP 10%] CFOP — Initial Technical Wireframe v0.1</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --paper: #f7f7f7;
+      --ink: #111111;
+      --muted: #555555;
+      --line: #222222;
+      --dash: #777777;
+      --grid: rgba(0, 0, 0, 0.045);
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 15px; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+    .mono { font-family: "Courier New", Courier, monospace; }
+    a { color: var(--ink); text-decoration: underline; cursor: pointer; }
+    button {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 12px;
+      padding: 6px 10px;
+      background: #fff;
+      color: #111;
+      border: 1px solid #111;
+      cursor: pointer;
+    }
+    button:hover { background: #111; color: #fff; }
+    button.active-tab { background: #111; color: #fff; font-weight: 700; }
+
+    /* Optional 12-col drafting grid overlay */
+    .grid-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 900;
+      padding: 0 16px;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    body.show-grid .grid-overlay { display: grid; }
+    .grid-col { background: rgba(0, 0, 0, 0.04); border-left: 1px dashed rgba(0,0,0,0.18); border-right: 1px dashed rgba(0,0,0,0.18); height: 100%; }
+
+    /* Top WIP status strip */
+    .wip-bar {
+      background: #111;
+      color: #fff;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 11px;
+      padding: 6px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .wip-bar button {
+      background: #111;
+      color: #fff;
+      border: 1px solid #777;
+      padding: 2px 7px;
+      font-size: 11px;
+    }
+    .wip-bar button:hover { background: #fff; color: #111; }
+
+    /* Bare wireframe navbar */
+    .wf-nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      background: #fff;
+      border-bottom: 1.5px solid #111;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .wf-brand {
+      font-family: "Courier New", Courier, monospace;
+      font-weight: 700;
+      font-size: 14px;
+      border: 1px dashed #111;
+      padding: 4px 8px;
+    }
+    .wf-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      font-size: 12.5px;
+    }
+    .wf-links a.active { font-weight: 700; background: #eee; padding: 2px 5px; }
+
+    /* Layout helpers */
+    .wrap { max-width: 1320px; margin: 0 auto; padding: 0 16px; }
+    .grid-12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .sec {
+      padding: 48px 0;
+      border-bottom: 1px dashed var(--dash);
+      background-image: linear-gradient(to right, var(--grid) 1px, transparent 1px),
+                        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .spec-tag {
+      display: inline-block;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 11px;
+      border: 1px solid #111;
+      background: #fff;
+      padding: 2px 6px;
+      margin-bottom: 10px;
+    }
+    .todo {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 11px;
+      color: var(--muted);
+      border: 1px dashed #888;
+      background: #fafafa;
+      padding: 4px 7px;
+      display: inline-block;
+    }
+
+    /* Crossed wireframe image placeholder */
+    .img-ph {
+      position: relative;
+      width: 100%;
+      background: #f2f2f2;
+      border: 1.5px solid #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .img-ph svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .img-ph-label {
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid #222;
+      padding: 6px 10px;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 11.5px;
+      max-width: 90%;
+    }
+
+    /* Section specifics matching cfop_awwwards.html skeleton */
+    .hero-box {
+      min-height: 76vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px 0 36px;
+    }
+    .hero-h1 {
+      font-size: clamp(28px, 3.6vw, 44px);
+      font-weight: 400;
+      line-height: 1.12;
+      margin: 12px 0 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .col-1-5 { grid-column: 1 / 6; }
+    .col-6-12 { grid-column: 6 / 13; }
+    .col-7-12 { grid-column: 7 / 13; }
+    .col-1-12 { grid-column: 1 / 13; }
+
+    .portraits-wf {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .box-card {
+      border: 1px solid #222;
+      background: #fff;
+      padding: 16px;
+    }
+
+    .what-list { list-style: none; padding: 0; margin: 16px 0 0; }
+    .what-list li {
+      border-top: 1px solid #ccc;
+      padding: 10px 6px;
+      cursor: pointer;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px;
+    }
+    .what-list li:last-child { border-bottom: 1px solid #ccc; }
+    .what-list li.active { background: #111; color: #fff; font-weight: 700; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .kpi-num { font-size: 32px; font-weight: 700; font-family: "Courier New", Courier, monospace; }
+
+    table { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; margin-top: 12px; }
+    th, td { border: 1px solid #333; padding: 8px 10px; text-align: left; }
+    th { background: #eaeaea; font-family: "Courier New", Courier, monospace; font-size: 12px; }
+
+    .wf-footer {
+      background: #efefef;
+      border-top: 2px solid #111;
+      padding: 40px 0 28px;
+    }
+    .wf-cookie {
+      position: fixed;
+      left: 14px;
+      bottom: 14px;
+      width: 290px;
+      background: #fff;
+      border: 1.5px solid #111;
+      padding: 10px 12px;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 11px;
+      z-index: 600;
+    }
+
+    .view { display: none; }
+    .view.active { display: block; }
+
+    @media (max-width: 900px) {
+      .col-1-5, .col-6-12, .col-7-12 { grid-column: 1 / 13; }
+      .portraits-wf, .kpi-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid-overlay" aria-hidden="true">
+    <div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+    <div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+    <div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+  </div>
+
+  <!-- WIP HEADER -->
+  <div class="wip-bar">
+    <span>BUILD: v0.1-alpha (10% COMPLETE) // WIREFRAME ARCHITECTURE FOR CFOP.PL-CZ</span>
+    <div style="display:flex; gap:6px; align-items:center;">
+      <button onclick="document.body.classList.toggle('show-grid')">[Toggle 12-Col Grid]</button>
+      <span id="langStatus">LANG: EN</span>
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('pl')">PL</button>
+      <button onclick="setLang('cs')">CZ</button>
+    </div>
+  </div>
+
+  <!-- WIREFRAME NAVBAR -->
+  <header class="wf-nav">
+    <a class="wf-brand" onclick="go('home')">CFOP [LOGO_SVG_TODO]</a>
+    <nav class="wf-links" id="wfNav">
+      <a onclick="go('home')" data-v="home" class="active">00.Home</a>
+      <a onclick="go('whatwedo')" data-v="whatwedo">01.WhatWeDo</a>
+      <a onclick="go('about')" data-v="about">02.About&amp;Gov</a>
+      <a onclick="go('members')" data-v="members">03.Members</a>
+      <a onclick="go('membership')" data-v="membership">04.Join</a>
+      <a onclick="go('docs')" data-v="docs">05.Docs&amp;Data</a>
+      <a onclick="go('events')" data-v="events">06.Events</a>
+      <a onclick="go('portal')" data-v="portal">07.Extranet[Lock]</a>
+      <a onclick="go('contacts')" data-v="contacts">08.Contacts</a>
+    </nav>
+  </header>
+
+  <!-- ==================== VIEW: HOME ==================== -->
+  <main id="view-home" class="view active">
+
+    <!-- PRELOADER STUB -->
+    <div style="background:#f3f3f3; border-bottom:1px dashed #666; padding:6px 16px; font-family:'Courier New',monospace; font-size:11px;">
+      [TODO: 4-Layer Preloader Curtain (0%–100% + wipe animation) — disabled in v0.1 wireframe]
+    </div>
+
+    <!-- SECTION 0: HERO -->
+    <section class="sec">
+      <div class="wrap hero-box">
+        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span class="spec-tag">SEC 00 // HERO (100svh target)</span>
+          <span class="todo">[TODO: Full-bleed dark photo + brightness(60%) + scale(1.06->1) reveal]</span>
+        </div>
+
+        <div class="img-ph" style="height:260px; margin:16px 0;">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#999" stroke-width="0.5"/><line x1="100" y1="0" x2="0" y2="100" stroke="#999" stroke-width="0.5"/></svg>
+          <div class="img-ph-label">[IMG PLACEHOLDER: hero_cieszyn_civic.jpg | 16:9 | Olza River Bridge Dusk]</div>
+        </div>
+
+        <div class="grid-12" style="align-items:end;">
+          <div class="col-1-5">
+            <span class="mono" style="font-size:12px;">■ [TAG]: Welcome</span>
+          </div>
+          <div class="col-6-12">
+            <h1 class="hero-h1" id="heroH1">Building Cieszyn’s civic future. One NGO, one social enterprise, one partnership at a time.</h1>
+            <button onclick="document.getElementById('secWhat').scrollIntoView({behavior:'smooth'})">[ -&gt; What We Do ]</button>
+            <span class="todo" style="margin-left:8px;">[CTA color #c6f886 TBD]</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: ABOUT US + 2 PORTRAITS -->
+    <section class="sec">
+      <div class="wrap grid-12">
+        <div class="col-1-5">
+          <span class="spec-tag">SEC 01 // ABOUT US (Sticky Left TBD)</span>
+          <h2 style="font-size:32px; font-weight:400; margin:8px 0;">Cieszyn Silesia<br><span style="color:#777;">NGO Federation</span></h2>
+          <span class="todo">[TODO: position:sticky top:84px + two-tone heading]</span>
+        </div>
+
+        <div class="col-7-12">
+          <p>Cieszyn Federation of NGOs and Social Economy Entities (CFOP) acts as a regional umbrella linking non-profit entities and social enterprises across Cieszyn Silesia.</p>
+          <p>Positioned in the Polish–Czech cross-border ecosystem, CFOP connects civil society, public authorities, and local SMEs around entrepreneurship and capacity building.</p>
+
+          <div class="portraits-wf">
+            <div class="box-card">
+              <div class="img-ph" style="aspect-ratio:3/4;">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#999" stroke-width="0.7"/><line x1="100" y1="0" x2="0" y2="100" stroke="#999" stroke-width="0.7"/></svg>
+                <div class="img-ph-label">[PORTRAIT 3:4]<br>about_chair_portrait.jpg<br>Petr Kantor (Chairman)</div>
+              </div>
+              <div class="mono" style="font-size:11.5px; margin-top:8px;">Petr Kantor — Statutory Chairman</div>
+            </div>
+
+            <div class="box-card">
+              <div class="img-ph" style="aspect-ratio:3/4;">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#999" stroke-width="0.7"/><line x1="100" y1="0" x2="0" y2="100" stroke="#999" stroke-width="0.7"/></svg>
+                <div class="img-ph-label">[PORTRAIT 3:4]<br>about_coordinator_portrait.jpg<br>PL–CZ NGO Team</div>
+              </div>
+              <div class="mono" style="font-size:11.5px; margin-top:8px;">Cross-Border NGO &amp; Social Economy Team</div>
+            </div>
+          </div>
+
+          <div class="box-card">
+            <strong style="display:block; margin-bottom:6px;">[STORY SLOT — 21px editorial text TBD]</strong>
+            <span style="font-size:14px;">Today, that cross-border network operates as a regional hub linking NGOs, social enterprises, educators, and SMEs on both sides of the Olza river.</span>
+            <div style="margin-top:10px;"><button onclick="go('about')">[ -&gt; Our Story &amp; Governance ]</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: FEATURED INITIATIVE CAROUSEL -->
+    <section class="sec">
+      <div class="wrap">
+        <div class="box-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #ccc; padding-bottom:10px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+            <span class="spec-tag" style="margin:0;">SEC 02 // CAROUSEL [ <span id="wfSlideNum">01 / 04</span> ]</span>
+            <div>
+              <button onclick="wfMove(-1)">&lt; Prev</button>
+              <button onclick="wfMove(1)">Next &gt;</button>
+            </div>
+          </div>
+          <div class="grid-12" style="align-items:center;">
+            <div class="col-1-5">
+              <h3 id="wfSlideTitle" style="margin:0 0 8px;">Shaping Cieszyn’s Cross-Border Social Economy Charter.</h3>
+              <p id="wfSlideDesc" style="font-size:13px; color:var(--muted); margin:0 0 12px;">Connecting municipal leaders, NGOs, and social enterprises in Cieszyn and Český Těšín.</p>
+              <button onclick="go('membership')">[ -&gt; Action CTA ]</button>
+            </div>
+            <div class="col-6-12">
+              <div class="img-ph" style="height:220px;">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#999" stroke-width="0.6"/><line x1="100" y1="0" x2="0" y2="100" stroke="#999" stroke-width="0.6"/></svg>
+                <div class="img-ph-label" id="wfSlideImg">[CAROUSEL IMG 1393x690]<br>featured_charter_dusk.jpg</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: OUR COMMITMENTS -->
+    <section class="sec">
+      <div class="wrap">
+        <span class="spec-tag">SEC 03 // OUR COMMITMENTS (Full-bleed 92vh dark banner TBD)</span>
+        <div class="img-ph" style="height:210px; padding:20px;">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#bbb" stroke-width="0.5"/><line x1="100" y1="0" x2="0" y2="100" stroke="#bbb" stroke-width="0.5"/></svg>
+          <div class="img-ph-label" style="max-width:760px; text-align:left; padding:14px;">
+            <div class="mono" style="font-size:11px; margin-bottom:6px;">[BG: banner_crossborder_collab.jpg | brightness(62%)]</div>
+            <strong style="font-size:18px; font-family:Arial,sans-serif;">Grounded in cooperation. Focused on communities. Fuelled by social innovation. CFOP exists to empower Cieszyn Silesia’s civic ecosystem today, tomorrow, and for decades to come.</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: WHAT WE DO (5-PILLAR SPLIT) -->
+    <section class="sec" id="secWhat">
+      <div class="wrap grid-12">
+        <div class="col-1-5">
+          <span class="spec-tag">SEC 04 // WHAT WE DO (5-Item Index)</span>
+          <ul class="what-list" id="wfWhatList">
+            <li class="active" onclick="wfPickWhat(0,this)">[01] Advocacy &amp; Standards</li>
+            <li onclick="wfPickWhat(1,this)">[02] Cross-Border PL–CZ</li>
+            <li onclick="wfPickWhat(2,this)">[03] Social Economy</li>
+            <li onclick="wfPickWhat(3,this)">[04] Digital Skills &amp; Training</li>
+            <li onclick="wfPickWhat(4,this)">[05] Legislation &amp; Transparency</li>
+          </ul>
+          <div class="box-card" style="margin-top:14px;">
+            <div id="wfWhatH" style="font-weight:700; margin-bottom:6px;">Advocacy &amp; operational standards strengthen the voice of every member organization.</div>
+            <div id="wfWhatP" style="font-size:13px; color:var(--muted);">Developing cooperation standards, building public trust, and defending member interests before authorities.</div>
+          </div>
+        </div>
+
+        <div class="col-7-12">
+          <span class="todo">[TODO: Scroll-linked 440vh sticky track + rising 3:4 photo reel]</span>
+          <div class="img-ph" style="height:360px; margin-top:8px;">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#999" stroke-width="0.6"/><line x1="100" y1="0" x2="0" y2="100" stroke="#999" stroke-width="0.6"/></svg>
+            <div class="img-ph-label" id="wfWhatImg">[PILLAR PHOTO 3:4]<br>pillar_1_advocacy.jpg</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: OUR IMPACT (3 STACKED SLIDES WIREFRAME) -->
+    <section class="sec">
+      <div class="wrap">
+        <span class="spec-tag">SEC 05 // OUR IMPACT (3x 100vh sticky photo slides + count-up TBD)</span>
+
+        <div class="box-card" style="margin-bottom:12px;">
+          <div class="mono" style="font-size:11px; margin-bottom:6px;">SLIDE 01 // BG: impact_cieszyn_twilight.jpg [TODO: sticky 100vh + JS count-up]</div>
+          <div class="kpi-grid">
+            <div><div class="kpi-num">48+</div><div style="font-size:12.5px;">Member NGOs &amp; social enterprises united across Cieszyn Silesia.</div></div>
+            <div><div class="kpi-num">12</div><div style="font-size:12.5px;">Years representing non-profit interests (KRS 0000547004).</div></div>
+            <div><div class="kpi-num">2</div><div style="font-size:12.5px;">Border nations bridged daily across Poland and Czechia.</div></div>
+          </div>
+        </div>
+
+        <div class="box-card" style="margin-bottom:12px;">
+          <div class="mono" style="font-size:11px; margin-bottom:6px;">SLIDE 02 // BG: featured_conference_wide.jpg</div>
+          <div class="kpi-grid">
+            <div><div class="kpi-num">650+</div><div style="font-size:12.5px;">NGO coordinators, social founders &amp; educators trained.</div></div>
+            <div><div class="kpi-num">24+</div><div style="font-size:12.5px;">Joint European &amp; cross-border entrepreneurship initiatives.</div></div>
+            <div><div class="kpi-num">18+</div><div style="font-size:12.5px;">Municipalities, chambers &amp; SMEs active in partnerships.</div></div>
+          </div>
+        </div>
+
+        <div class="box-card">
+          <div class="mono" style="font-size:11px; margin-bottom:6px;">SLIDE 03 // BG: featured_charter_dusk.jpg</div>
+          <div class="kpi-grid">
+            <div><div class="kpi-num">1.4M€+</div><div style="font-size:12.5px;">Regional &amp; European grant value mobilized.</div></div>
+            <div><div class="kpi-num">14</div><div style="font-size:12.5px;">Legislative reviews &amp; civic policy briefs annually.</div></div>
+            <div><div class="kpi-num">100%</div><div style="font-size:12.5px;">Open statutory governance &amp; bilingual PL–CZ–EN resources.</div></div>
+          </div>
+          <div style="margin-top:10px;"><button onclick="go('docs')">[ -&gt; View All Stats ]</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: COLLABORATE WITH US -->
+    <section class="sec">
+      <div class="wrap grid-12">
+        <div class="col-1-5">
+          <span class="spec-tag">SEC 06 // COLLABORATE WITH US</span>
+          <h3 style="font-size:28px; margin:6px 0;">Collaborate<br><span style="color:#777;">With Us</span></h3>
+        </div>
+        <div class="col-7-12">
+          <p>Over the years, CFOP has united non-profits, social enterprises, and business partners to strengthen entrepreneurial competences and social innovation.</p>
+          <button onclick="go('membership')">[ -&gt; Get Involved ]</button>
+          <button onclick="go('whatwedo')" style="margin-left:8px;">[ -&gt; Our Mission ]</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: LOCATION DETAILS + LIVE CLOCKS -->
+    <section class="sec">
+      <div class="wrap grid-12">
+        <div class="col-1-5">
+          <span class="spec-tag">SEC 07 // LOCATION &amp; CLOCKS</span>
+          <p style="font-size:13px;">Operating across the Polish–Czech Euroregion of Cieszyn Silesia and European partner hubs.</p>
+          <div class="img-ph" style="height:130px; width:260px;">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#999" stroke-width="0.7"/><line x1="100" y1="0" x2="0" y2="100" stroke="#999" stroke-width="0.7"/></svg>
+            <div class="img-ph-label">[PLACEHOLDER: PL–CZ Flag / Map Widget]</div>
+          </div>
+        </div>
+        <div class="col-7-12">
+          <table>
+            <thead><tr><th>Hub / City</th><th>Region</th><th>Live Time (JS Stub)</th></tr></thead>
+            <tbody>
+              <tr><td>Cieszyn (PL) — HQ</td><td>Euroregion Cieszyn Silesia</td><td class="mono wf-clk" data-tz="Europe/Warsaw">--:--:--</td></tr>
+              <tr><td>Český Těšín (CZ)</td><td>Euroregion Cieszyn Silesia</td><td class="mono wf-clk" data-tz="Europe/Prague">--:--:--</td></tr>
+              <tr><td>Karviná / Ostrava (CZ)</td><td>Moravian-Silesian Partner Desk</td><td class="mono wf-clk" data-tz="Europe/Prague">--:--:--</td></tr>
+              <tr><td>Brussels (BE) / Vienna (AT)</td><td>European Partner Networks</td><td class="mono wf-clk" data-tz="Europe/Brussels">--:--:--</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== INNER SPA WIREFRAME VIEWS ==================== -->
+  <main id="view-about" class="view"><div class="wrap sec">
+    <span class="spec-tag">ROUTE: /about // GOVERNANCE &amp; STATUTORY BODIES</span>
+    <h1>Governance, Mission &amp; Statutory Bodies</h1>
+    <p><strong>Organization:</strong> Cieszyn Federation of NGOs and Social Economy Entities | <strong>KRS:</strong> 0000547004 | <strong>NIP:</strong> 5482668985 | <strong>Address:</strong> ul. Wałowa 4, 43-400 Cieszyn, Poland</p>
+    <table>
+      <thead><tr><th>Organ</th><th>Role</th><th>Name</th></tr></thead>
+      <tbody>
+        <tr><td>Statutory Board</td><td>Chairman</td><td>Petr Kantor</td></tr>
+        <tr><td>Statutory Board</td><td>Vicechairman</td><td>Aleksander Górny</td></tr>
+        <tr><td>Statutory Board</td><td>Member</td><td>Joanna Brenicka</td></tr>
+        <tr><td>Supervisory Board</td><td>Chairman</td><td>Bartosz Tyrna</td></tr>
+        <tr><td>Supervisory Board</td><td>Member</td><td>Mariusz Waldemar Andrukiewicz</td></tr>
+      </tbody>
+    </table>
+  </div></main>
+
+  <main id="view-whatwedo" class="view"><div class="wrap sec">
+    <span class="spec-tag">ROUTE: /what-we-do // 5 CORE PROGRAMMES</span>
+    <h1>What We Do</h1>
+    <ul>
+      <li><strong>01. Cooperation &amp; Standards:</strong> Developing NGO &amp; social economy standards and defending member interests.</li>
+      <li><strong>02. Social Economy &amp; Business Bridges:</strong> Entrepreneurial competences, social innovation, SME partnerships.</li>
+      <li><strong>03. Cross-Border PL–CZ Integration:</strong> Euroregion Cieszyn Silesia &amp; OHK Karviná joint projects.</li>
+      <li><strong>04. Capacity Building &amp; Digital Skills:</strong> Training labs for NGO coordinators and educators.</li>
+      <li><strong>05. Legislation &amp; Transparency:</strong> Public policy reviews and open statutes/reports.</li>
+    </ul>
+  </div></main>
+
+  <main id="view-members" class="view"><div class="wrap sec">
+    <span class="spec-tag">ROUTE: /members // FILTERABLE DIRECTORY STUB</span>
+    <h1>Member NGOs &amp; Partners</h1>
+    <p class="todo">[TODO: live category filters + search bar + interactive map]</p>
+    <table>
+      <thead><tr><th>Organization</th><th>Category</th><th>City</th><th>Activity</th></tr></thead>
+      <tbody>
+        <tr><td>Cieszyn NGO Support Hub</td><td>NGO</td><td>Cieszyn, PL</td><td>Civic coordination &amp; volunteering</td></tr>
+        <tr><td>Spółdzielnia Socjalna Olza</td><td>Social Enterprise</td><td>Cieszyn, PL</td><td>Inclusive workshops &amp; hospitality</td></tr>
+        <tr><td>Slezské vzdělávací centrum s.r.o.</td><td>CZ Partner</td><td>Karviná, CZ</td><td>Digital skills &amp; adult education</td></tr>
+        <tr><td>OHK Karviná</td><td>CZ Partner</td><td>Český Těšín, CZ</td><td>Cross-border business &amp; NGO bridge</td></tr>
+        <tr><td>Pracownia Rzemiosła i Integracji</td><td>Social Enterprise</td><td>Skoczów, PL</td><td>Craft production &amp; social inclusion</td></tr>
+      </tbody>
+    </table>
+  </div></main>
+
+  <main id="view-membership" class="view"><div class="wrap sec">
+    <span class="spec-tag">ROUTE: /membership // FEES &amp; APPLICATION STUB</span>
+    <h1>Become a Federation Member</h1>
+    <table>
+      <thead><tr><th>Tier</th><th>Entity</th><th>Annual Fee</th></tr></thead>
+      <tbody>
+        <tr><td>Ordinary Member</td><td>NGO / Association</td><td>300 PLN / yr</td></tr>
+        <tr><td>Social Enterprise</td><td>Social Cooperative</td><td>450 PLN / yr</td></tr>
+        <tr><td>Cross-Border Partner</td><td>Czech / EU Entity</td><td>100 EUR / yr</td></tr>
+      </tbody>
+    </table>
+    <div class="box-card" style="margin-top:16px; max-width:520px;">
+      <div class="mono" style="font-size:12px; margin-bottom:8px;">[FORM STUB: Online Application]</div>
+      <input placeholder="Organization Name" style="width:100%; padding:6px; margin-bottom:8px; border:1px solid #333;" />
+      <input placeholder="Official Email" style="width:100%; padding:6px; margin-bottom:8px; border:1px solid #333;" />
+      <button onclick="alert('Stub submitted (v0.1 wireframe)')">[ Submit Application Stub ]</button>
+    </div>
+  </div></main>
+
+  <main id="view-docs" class="view"><div class="wrap sec">
+    <span class="spec-tag">ROUTE: /docs // CHARTS &amp; PDF REPOSITORY STUB</span>
+    <h1>Documents, Legislation &amp; Impact Data</h1>
+    <div class="portraits-wf">
+      <div class="box-card"><div class="todo">[TODO: SVG Donut Chart — 42% Social Econ / 33% Advocacy / 25% Digital]</div></div>
+      <div class="box-card"><div class="todo">[TODO: SVG Bar Chart — 2022–2026 Growth]</div></div>
+    </div>
+    <table>
+      <thead><tr><th>Document Title</th><th>Category</th><th>Format</th></tr></thead>
+      <tbody>
+        <tr><td>CFOP Federation Statutes (Consolidated Text)</td><td>Statutes</td><td>PDF · 410 kB</td></tr>
+        <tr><td>Annual Transparency Report 2025</td><td>Statutes</td><td>PDF · 2.2 MB</td></tr>
+        <tr><td>PL–CZ Legislative Review 2026</td><td>Legislation</td><td>PDF · 680 kB</td></tr>
+        <tr><td>Operational Standards for Social Economy Entities</td><td>Standards</td><td>PDF · 540 kB</td></tr>
+      </tbody>
+    </table>
+  </div></main>
+
+  <main id="view-events" class="view"><div class="wrap sec">
+    <span class="spec-tag">ROUTE: /events // CALENDAR &amp; PRESS KIT STUB</span>
+    <h1>Events, Workshops &amp; Press Room</h1>
+    <table>
+      <thead><tr><th>Date &amp; City</th><th>Event</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>28 Nov 2026 · Český Těšín</td><td>PL–CZ NGO Digital &amp; AI Lab</td><td>[Registration Stub]</td></tr>
+        <tr><td>12 Dec 2026 · Cieszyn</td><td>Annual Cross-Border Social Economy Forum</td><td>[Open]</td></tr>
+      </tbody>
+    </table>
+    <p class="todo" style="margin-top:12px;">[TODO: Press Kit ZIP (Vector Logo + Press Photos + Spokesperson Contact)]</p>
+  </div></main>
+
+  <main id="view-portal" class="view"><div class="wrap sec">
+    <span class="spec-tag">ROUTE: /extranet // RESTRICTED MEMBER AREA STUB</span>
+    <h1>Member Area (Pro členy / Dla członków)</h1>
+    <div class="box-card" style="max-width:440px;">
+      <div class="mono" style="font-size:12px; margin-bottom:8px;">[AUTH STUB — Backend OAuth/Session TBD]</div>
+      <input placeholder="member@ngo-cieszyn.org" style="width:100%; padding:6px; margin-bottom:8px; border:1px solid #333;" />
+      <input type="password" value="••••••••" style="width:100%; padding:6px; margin-bottom:8px; border:1px solid #333;" />
+      <button onclick="document.getElementById('wfPortalBox').style.display='block'">[ Enter Demo Extranet ]</button>
+      <div id="wfPortalBox" style="display:none; margin-top:12px; border-top:1px dashed #666; padding-top:8px; font-size:12.5px;">
+        <strong>Unlocked Stub:</strong> Board Minutes PDF · Draft PL–CZ Grant Call · Bilingual Agreement DOCX
+      </div>
+    </div>
+  </div></main>
+
+  <main id="view-contacts" class="view"><div class="wrap sec">
+    <span class="spec-tag">ROUTE: /contacts // REGISTRY &amp; OFFICE</span>
+    <h1>Contacts &amp; Legal Registry</h1>
+    <p><strong>CFOP — Cieszyn Federation of NGOs and Social Economy Entities</strong><br>
+    Address: ul. Wałowa 4, 43-400 Cieszyn, Poland<br>
+    Email: cfoppes@gmail.com | Tel: +48 608 031 289<br>
+    KRS: 0000547004 | NIP: 5482668985 | VAT Payer: No</p>
+  </div></main>
+
+  <!-- WIREFRAME FOOTER -->
+  <footer class="wf-footer">
+    <div class="wrap grid-12">
+      <div class="col-1-5">
+        <div class="mono" style="font-weight:700; margin-bottom:6px;">CFOP — WIREFRAME FOOTER [v0.1]</div>
+        <div style="font-size:12px;">ul. Wałowa 4, 43-400 Cieszyn, Poland<br>KRS: 0000547004 · NIP: 5482668985</div>
+      </div>
+      <div class="col-7-12 mono" style="font-size:12px;">
+        <div><strong>SITEMAP STUB:</strong> <a onclick="go('home')">Home</a> | <a onclick="go('about')">About</a> | <a onclick="go('whatwedo')">What We Do</a> | <a onclick="go('members')">Members</a> | <a onclick="go('docs')">Docs</a> | <a onclick="go('events')">Events</a> | <a onclick="go('portal')">Extranet</a> | <a onclick="go('contacts')">Contacts</a></div>
+        <div style="margin-top:8px; color:var(--muted);">[TODO: Midnight navy #0d163c 2-tier layout + Newsletter + GDPR/Cookie policy]</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- COOKIE STUB -->
+  <div class="wf-cookie" id="wfCookie">
+    <div>[COOKIE STUB] GDPR consent placeholder.</div>
+    <div style="margin-top:6px; display:flex; gap:6px;">
+      <button onclick="document.getElementById('wfCookie').style.display='none'">Accept</button>
+      <button onclick="document.getElementById('wfCookie').style.display='none'">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const HERO_I18N = {
+      en: 'Building Cieszyn’s civic future. One NGO, one social enterprise, one partnership at a time.',
+      pl: 'Budujemy przyszłość Śląska Cieszyńskiego. Jedna organizacja, jedna inicjatywa społeczna naraz.',
+      cs: 'Budujeme občanskou budoucnost Těšínska. Jedna neziskovka, jeden sociální podnik, jedno partnerství.'
+    };
+    function setLang(l) {
+      document.getElementById('langStatus').textContent = 'LANG: ' + l.toUpperCase();
+      document.getElementById('heroH1').textContent = HERO_I18N[l] || HERO_I18N.en;
+    }
+
+    function go(id) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      const el = document.getElementById('view-' + id);
+      if (el) el.classList.add('active');
+      document.querySelectorAll('#wfNav a').forEach(a => a.classList.toggle('active', a.dataset.v === id));
+      window.scrollTo(0, 0);
+    }
+
+    const SLIDES = [
+      ['Shaping Cieszyn’s Cross-Border Social Economy Charter.', 'Connecting municipal leaders, NGOs, and social enterprises in Cieszyn and Český Těšín.', 'featured_charter_dusk.jpg'],
+      ['PL–CZ Digital & AI Lab for Non-Profits.', 'Hands-on training for regional NGO coordinators and civic educators.', 'featured_conference_wide.jpg'],
+      ['Cross-Border Civic Forum in Cieszyn Silesia.', 'Bringing Polish and Czech municipal desks together around shared standards.', 'banner_crossborder_collab.jpg'],
+      ['Open Member Extranet & Partner Network.', 'Shared repository for grant templates, legislative reviews, and board briefs.', 'about_workshop_ngo.jpg']
+    ];
+    let sIdx = 0;
+    function wfMove(d) {
+      sIdx = (sIdx + d + SLIDES.length) % SLIDES.length;
+      document.getElementById('wfSlideNum').textContent = '0' + (sIdx + 1) + ' / 04';
+      document.getElementById('wfSlideTitle').textContent = SLIDES[sIdx][0];
+      document.getElementById('wfSlideDesc').textContent = SLIDES[sIdx][1];
+      document.getElementById('wfSlideImg').innerHTML = '[CAROUSEL IMG 1393x690]<br>' + SLIDES[sIdx][2];
+    }
+
+    const WHAT = [
+      ['Advocacy & operational standards strengthen the voice of every member organization.', 'Developing cooperation standards, building public trust, and defending member interests.', 'pillar_1_advocacy.jpg'],
+      ['Bridging Polish and Czech communities across the Olza River.', 'Partnering with Czech municipalities and Euroregion bodies on cross-border initiatives.', 'pillar_2_crossborder.jpg'],
+      ['Social entrepreneurship creates sustainable livelihoods and inclusive workplaces.', 'Empowering social cooperatives and inclusive employers across Cieszyn Silesia.', 'pillar_3_social_enterprise.jpg'],
+      ['Practical digital skills and training for non-profit coordinators.', 'AI, grant workflows, and capacity-building labs for local NGO teams.', 'pillar_4_digital_skills.jpg'],
+      ['Transparent governance and legislative monitoring.', 'Open statutes, annual reports, and policy analysis for non-profits.', 'pillar_5_heritage.jpg']
+    ];
+    function wfPickWhat(i, li) {
+      document.querySelectorAll('#wfWhatList li').forEach(x => x.classList.remove('active'));
+      li.classList.add('active');
+      document.getElementById('wfWhatH').textContent = WHAT[i][0];
+      document.getElementById('wfWhatP').textContent = WHAT[i][1];
+      document.getElementById('wfWhatImg').innerHTML = '[PILLAR PHOTO 3:4]<br>' + WHAT[i][2];
+    }
+
+    function tick() {
+      const now = new Date();
+      document.querySelectorAll('.wf-clk[data-tz]').forEach(el => {
+        try { el.textContent = now.toLocaleTimeString('en-GB', { timeZone: el.dataset.tz, hour12: false }); }
+        catch { el.textContent = now.toLocaleTimeString('en-GB', { hour12: false }); }
+      });
+    }
+    tick(); setInterval(tick, 1000);
+  </script>
+</body>
+</html>
