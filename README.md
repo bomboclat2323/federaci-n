@@ -4,7 +4,7 @@ Official repository for the **CFOP** (*Cieszyńska Federacja Organizacji Pozarz�
 
 ## Repository Structure
 
-- `wireframe/cfop_maqueta_10pct.html` — Stage 1 static structural wireframe (standalone HTML file, opens directly in any browser without a build step). Used to validate the 8-section site map and page hierarchy before writing the clean React production app.
+- `wireframe/cfop_wireframe.html` — Stage 1 static structural wireframe (standalone HTML file, opens directly in any browser without a build step). Used to validate the 8-section site map and page hierarchy before writing the clean React production app.
 - `docs/` — Project documentation, planning, architecture notes, and client sign-off materials:
   - `01_CLIENT_RESPONSE_EMAIL.md` — Project status summary and response notes.
   - `02_PROJECT_ROADMAP_AND_STATUS.md` — Done vs. mocked vs. planned inventory and Milestone 1–5 schedule.
@@ -15,7 +15,7 @@ Official repository for the **CFOP** (*Cieszyńska Federacja Organizacji Pozarz�
 
 ## Previewing the Stage 1 Wireframe
 
-Open `wireframe/cfop_maqueta_10pct.html` directly in any web browser (no Node server or dependencies required).
+Open `wireframe/cfop_wireframe.html` directly in any web browser (no Node server or dependencies required).
 
 ## Planned Production Stack
 

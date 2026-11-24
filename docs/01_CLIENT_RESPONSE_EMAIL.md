@@ -4,12 +4,12 @@ Subject: CFOP Website - Project Status, Architecture Plan & Content Verification
 
 Hi,
 
-Thanks for taking the time to review the wireframe (`cfop_maqueta_10pct.html`) and the GitHub repository. Everything you flagged makes complete sense, and I agree with your priorities: we should get the documentation, verified content, and core working pages right before spending time on animations or extra visual polish.
+Thanks for taking the time to review the wireframe and the GitHub repository. Everything you flagged makes complete sense, and I agree with your priorities: we should get the documentation, verified content, and core working pages right before spending time on animations or extra visual polish.
 
 Here is where things actually stand and how we plan to handle each point:
 
 1. The HTML wireframe vs. the GitHub repository
-`wireframe/cfop_maqueta_10pct.html` is just an early static wireframe to agree on page structure and navigation before rebuilding the production app. It is not meant to be production code. The earlier Czech React/Vite draft from the initial commits has been moved to `legacy_archive/` so we can start clean from verified content and an approved design. Updating the repository `README.md` and documenting the architecture properly is the first step before moving to the next build stage.
+`wireframe/cfop_wireframe.html` is just an early static wireframe to agree on page structure and navigation before rebuilding the production app. It is not meant to be production code. The earlier Czech React/Vite draft from the initial commits has been moved to `legacy_archive/` so we can start clean from verified content and an approved design. Updating the repository `README.md` and documenting the architecture properly is the first step before moving to the next build stage.
 
 2. Content sources and placeholder numbers
 The basic legal and contact details in the wireframe (organization name, `ul. Wałowa 4, 43-400 Cieszyn`, `KRS 0000547004`, `NIP 5482668985`, `cfoppes@gmail.com`, `+48 608 031 289`, and the board names) came from the existing CFOP site (`cfop-djs.pages.dev`).

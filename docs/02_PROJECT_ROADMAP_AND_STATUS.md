@@ -7,7 +7,7 @@ To keep expectations clear, here is an honest breakdown of where the project sta
 **Done**
 - Review of 20 Czech federation and association websites (`analisis_webs_federaciones.pdf`) to see which pages, legal blocks, and features are standard in practice.
 - Draft site map with 8 main sections tailored to a Polish-Czech cross-border NGO federation.
-- Initial static wireframe (`wireframe/cfop_maqueta_10pct.html`) showing the rough page layout and section order.
+- Initial static wireframe (`wireframe/cfop_wireframe.html`) showing the rough page layout and section order.
 - Earlier Czech React/Vite draft moved to `legacy_archive/` on GitHub so the clean production app can be built from verified content.
 
 **Mocked only (demonstrative in the wireframe)**
@@ -74,4 +74,4 @@ The schedule below prioritizes repo cleanup, verified content, and working core 
 
 ## 4. How the wireframe relates to the React app
 
-The wireframe (`cfop_maqueta_10pct.html`) is just a throwaway layout sketch so we can agree on structure without getting bogged down in React setup early on. In the repository, each section of that wireframe becomes a separate React component (`Navbar`, `Footer`, `HomePage`, `AboutPage`, `MembersPage`, `DocumentsPage`, etc.) backed by structured data and real translations.
+The wireframe (`wireframe/cfop_wireframe.html`) is just a throwaway layout sketch so we can agree on structure without getting bogged down in React setup early on. In the repository, each section of that wireframe becomes a separate React component (`Navbar`, `Footer`, `HomePage`, `AboutPage`, `MembersPage`, `DocumentsPage`, etc.) backed by structured data and real translations.

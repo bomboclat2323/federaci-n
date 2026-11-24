@@ -1,0 +1,576 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[WIP 15%] CFOP â€” Grayscale Layout &amp; Typography Pass v0.1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --gray-50: #f6f6f7;
+      --gray-100: #ececee;
+      --gray-200: #dcdce0;
+      --gray-400: #8e8e96;
+      --ink: #1a1a1a;
+      --muted: #666666;
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 16px; overflow-x: clip; }
+    body {
+      margin: 0;
+      font-family: "Manrope", Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.48;
+      overflow-x: clip;
+    }
+    .mono { font-family: "Fira Code", monospace; }
+    a { color: inherit; text-decoration: none; cursor: pointer; }
+    button { font-family: inherit; cursor: pointer; }
+
+    .wrap-12 {
+      width: 100%;
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: 16px;
+    }
+
+    /* WIP 15% Bar */
+    .wip-bar {
+      background: #1a1a1a;
+      color: #fff;
+      font-family: "Fira Code", monospace;
+      font-size: 10.5px;
+      padding: 5px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .wip-tag {
+      background: #fff;
+      color: #1a1a1a;
+      padding: 1px 6px;
+      font-weight: 700;
+    }
+
+    /* Monochrome Lo-Fi Controls (brand colors pending v0.2) */
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 38px;
+      padding: 0 16px;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: #fff;
+      font-size: 13.5px;
+      font-weight: 500;
+      border-radius: 2px;
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 38px;
+      padding: 0 14px;
+      border: 1px solid var(--gray-200);
+      background: #fff;
+      color: var(--ink);
+      font-size: 13.5px;
+      font-weight: 500;
+      border-radius: 2px;
+    }
+    .btn-outline.active { border-color: var(--ink); background: var(--ink); color: #fff; }
+
+    .tag-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .tag-dot::before { content: ""; width: 6px; height: 6px; background: var(--ink); display: inline-block; }
+
+    .todo-note {
+      display: inline-block;
+      font-family: "Fira Code", monospace;
+      font-size: 11px;
+      color: var(--muted);
+      border: 1px dashed var(--gray-400);
+      background: var(--gray-50);
+      padding: 3px 8px;
+    }
+
+    /* Grayscale Lo-Fi Image Placeholder */
+    .lofi-img {
+      position: relative;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      overflow: hidden;
+    }
+    .lofi-img svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .lofi-label {
+      position: relative;
+      z-index: 2;
+      font-family: "Fira Code", monospace;
+      font-size: 11px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--gray-200);
+      padding: 5px 10px;
+      color: var(--ink);
+    }
+
+    /* Clean Grayscale Sticky Header */
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      height: 56px;
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      gap: 12px;
+    }
+    .nav-brand { font-weight: 700; font-size: 15px; letter-spacing: -0.02em; }
+    .nav-links { display: flex; align-items: center; gap: 16px; font-size: 13.5px; color: var(--muted); }
+    .nav-links a.active { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 5px; }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+    .lang-box { display: inline-flex; flex-shrink: 0; border: 1px solid var(--gray-200); border-radius: 2px; overflow: hidden; }
+    .lang-box button { border: none; background: #fff; padding: 4px 7px; font-size: 11px; font-weight: 600; color: var(--muted); }
+    .lang-box button.active { background: var(--ink); color: #fff; }
+
+    /* SEC 0: HERO (Grayscale lo-fi stage with real Manrope 50px scale) */
+    .hero {
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 40px 0 64px;
+    }
+    .hero-ph { grid-column: 1 / 13; height: 240px; margin-bottom: 32px; }
+    .hero-tag { grid-column: 1 / 4; padding-top: 8px; }
+    .hero-main { grid-column: 6 / 13; }
+    .hero-main h1 {
+      margin: 0 0 20px;
+      font-size: clamp(30px, 3.6vw, 48px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+    }
+
+    /* SEC 1: ABOUT US */
+    .sec { padding: 72px 0; border-bottom: 1px solid var(--gray-200); background: #fff; }
+    .about-left { grid-column: 1 / 5; position: sticky; top: 76px; align-self: start; }
+    .about-left h2 {
+      margin: 14px 0 10px;
+      font-size: clamp(30px, 3.3vw, 44px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .about-left h2 span { display: block; color: var(--gray-400); }
+    .about-right { grid-column: 7 / 13; }
+    .body-p { font-size: 14.5px; color: var(--muted); max-width: 500px; margin: 0 0 14px; }
+    .portraits-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 28px 0; }
+    .cap { font-size: 12.5px; margin-top: 7px; color: var(--muted); }
+    .lead-p { font-size: 19px; line-height: 1.32; margin: 0 0 16px; max-width: 520px; }
+
+    /* SEC 2: CAROUSEL LO-FI */
+    .box-frame { border: 1px solid var(--gray-200); background: var(--gray-50); padding: 20px; border-radius: 2px; }
+    .carousel-head {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 14px; margin-bottom: 20px; border-bottom: 1px solid var(--gray-200);
+    }
+
+    /* SEC 3: COMMITMENTS LO-FI */
+    .commit-sec { background: #26262a; color: #fff; padding: 72px 0; }
+    .commit-sec .tag-dot { color: #ccc; }
+    .commit-sec .tag-dot::before { background: #fff; }
+
+    /* SEC 4: WHAT WE DO (5-tab grayscale index) */
+    .what-tabs { margin-top: 24px; }
+    .what-tab {
+      display: block; width: 100%; text-align: left; background: transparent;
+      border: none; border-top: 1px solid var(--gray-200); padding: 12px 0;
+      font-size: 14px; color: var(--gray-400);
+    }
+    .what-tab:last-child { border-bottom: 1px solid var(--gray-200); }
+    .what-tab.active { color: var(--ink); font-weight: 600; border-top-color: var(--ink); }
+
+    /* SEC 5: IMPACT LO-FI */
+    .impact-band { background: #f2f2f4; padding: 52px 0; border-bottom: 1px solid var(--gray-200); }
+    .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .kpi-num { font-size: clamp(30px, 3vw, 42px); font-weight: 500; letter-spacing: -0.02em; }
+    .kpi-desc { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* SEC 7: CLOCKS */
+    .clocks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+    .clock-item { padding: 10px 0; border-bottom: 1px solid var(--gray-200); }
+    .clock-city { font-size: 13.5px; font-weight: 600; }
+    .clock-time { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    /* FOOTER */
+    .lofi-footer { background: #1f1f22; color: #e5e5e5; padding: 52px 0 28px; }
+    .ft-cols { grid-column: 7 / 13; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; font-size: 13px; }
+    .ft-cols h4 { margin: 0 0 10px; font-size: 11px; text-transform: uppercase; color: #999; letter-spacing: 0.04em; }
+    .ft-cols ul { list-style: none; padding: 0; margin: 0; }
+    .ft-cols li { margin-bottom: 6px; }
+
+    /* INNER VIEWS */
+    .view { display: none; }
+    .view.active { display: block; }
+    .sub-head { background: #26262a; color: #fff; padding: 54px 0 42px; }
+    .sub-head h1 { grid-column: 1 / 12; margin: 8px 0; font-size: clamp(28px, 3.2vw, 40px); font-weight: 400; }
+    .sub-head p { grid-column: 1 / 9; margin: 0; color: #cccccc; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: #fff; }
+    th, td { border: 1px solid var(--gray-200); padding: 10px 12px; text-align: left; }
+    th { background: var(--gray-50); font-weight: 600; }
+
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .hero-tag, .hero-main, .about-left, .about-right, .ft-cols,
+      [style*="grid-column: 1 / 5"], [style*="grid-column: 1 / 6"], [style*="grid-column: 4 / 8"],
+      [style*="grid-column: 4 / 13"], [style*="grid-column: 7 / 13"], [style*="grid-column: 8 / 13"] {
+        grid-column: 1 / -1 !important;
+      }
+      .about-left { position: static; margin-bottom: 24px; }
+      .portraits-row, .kpi-grid, .clocks-grid, .ft-cols { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-right .btn-dark { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wip-bar">
+    <div><span class="wip-tag">WIREFRAME</span> CFOP v0.1 â€” Grayscale Lo-Fi Layout &amp; Manrope Typography Pass (Brand Palette &amp; Media Pending)</div>
+    <div class="mono">Prev: 10% Â· Next: 20%</div>
+  </div>
+
+  <header class="nav-bar">
+    <a class="nav-brand" onclick="go('home')">CFOP <span class="mono" style="font-weight:400; font-size:11px; color:var(--muted);">[v0.1]</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a onclick="go('whatwedo')" data-v="whatwedo">What We Do</a>
+      <a onclick="go('about')" data-v="about">About Us</a>
+      <a onclick="go('docs')" data-v="docs">Docs &amp; Data</a>
+      <a onclick="go('members')" data-v="members">Members</a>
+      <a onclick="go('events')" data-v="events">Events</a>
+      <a onclick="go('contacts')" data-v="contacts">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-box">
+        <button class="active" onclick="setLang('en',this)">EN</button>
+        <button onclick="setLang('pl',this)">PL</button>
+        <button onclick="setLang('cs',this)">CZ</button>
+      </div>
+      <button class="btn-outline" onclick="go('portal')">Extranet</button>
+      <button class="btn-dark" onclick="go('membership')">â†’ Get Involved</button>
+    </div>
+  </header>
+
+  <main id="view-home" class="view active">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap-12">
+        <div class="lofi-img hero-ph">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#c8c8cf" stroke-width="0.5"/><line x1="100" y1="0" x2="0" y2="100" stroke="#c8c8cf" stroke-width="0.5"/></svg>
+          <div class="lofi-label">[HERO MEDIA SLOT: hero_cieszyn_civic.jpg | Brand Theme Pending]</div>
+        </div>
+        <div class="hero-tag"><span class="tag-dot">Welcome</span></div>
+        <div class="hero-main">
+          <h1 id="heroH1">Building Cieszynâ€™s civic future. One NGO, one social enterprise, one partnership at a time.</h1>
+          <button class="btn-dark" onclick="document.getElementById('whatSec').scrollIntoView({behavior:'smooth'})">â†’ What We Do</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section class="sec">
+      <div class="wrap-12">
+        <div class="about-left">
+          <span class="tag-dot">About Us</span>
+          <h2>Cieszyn Silesia<span>NGO Federation</span></h2>
+          <span class="todo-note">[Sticky left col enabled]</span>
+        </div>
+        <div class="about-right">
+          <p class="body-p">Cieszyn Federation of NGOs and Social Economy Entities (CFOP) holds a strong, established role as a regional umbrella organization integrating non-profit entities and social enterprises across Cieszyn Silesia.</p>
+          <p class="body-p">Positioned in the Polishâ€“Czech cross-border ecosystem, CFOP connects civil society, social economy actors, public authorities, and local businesses around entrepreneurship, social innovation, and capacity building.</p>
+
+          <div class="portraits-row">
+            <div>
+              <div class="lofi-img" style="aspect-ratio:3/4;">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#c8c8cf" stroke-width="0.7"/><line x1="100" y1="0" x2="0" y2="100" stroke="#c8c8cf" stroke-width="0.7"/></svg>
+                <div class="lofi-label">[3:4 PORTRAIT]<br>about_chair_portrait.jpg</div>
+              </div>
+              <div class="cap">Petr Kantor â€” Statutory Chairman</div>
+            </div>
+            <div>
+              <div class="lofi-img" style="aspect-ratio:3/4;">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#c8c8cf" stroke-width="0.7"/><line x1="100" y1="0" x2="0" y2="100" stroke="#c8c8cf" stroke-width="0.7"/></svg>
+                <div class="lofi-label">[3:4 PORTRAIT]<br>about_coordinator_portrait.jpg</div>
+              </div>
+              <div class="cap">Cross-Border NGO &amp; Social Economy Team</div>
+            </div>
+          </div>
+
+          <p class="lead-p">Today, that cross-border network operates as a strategic regional hub linking NGOs, social enterprises, educators, and SMEs on both sides of the Olza river.</p>
+          <button class="btn-outline" onclick="go('about')">â†’ Our Story</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED CAROUSEL -->
+    <section class="sec">
+      <div class="wrap-12">
+        <div class="box-frame" style="grid-column:1 / -1;">
+          <div class="carousel-head">
+            <span class="tag-dot">Featured Initiative Â· <span class="mono" id="cCount" style="margin-left:6px;">01 / 04</span></span>
+            <div style="display:flex; gap:6px;">
+              <button class="btn-outline" onclick="moveSlide(-1)">â€¹ Prev</button>
+              <button class="btn-outline" onclick="moveSlide(1)">Next â€º</button>
+            </div>
+          </div>
+          <div class="wrap-12" style="padding:0; align-items:center;">
+            <div style="grid-column:1 / 6;">
+              <h3 id="cTitle" style="margin:0 0 10px; font-size:26px; font-weight:400;">Shaping Cieszynâ€™s Cross-Border Social Economy Charter.</h3>
+              <p id="cDesc" class="body-p">Connecting municipal leaders, NGOs, and social enterprises in Cieszyn and ÄŒeskÃ½ TÄ›Å¡Ã­n around shared procurement standards.</p>
+              <button class="btn-dark" onclick="go('membership')">â†’ Apply Here</button>
+            </div>
+            <div style="grid-column:7 / 13;">
+              <div class="lofi-img" style="height:220px;">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#c8c8cf" stroke-width="0.6"/><line x1="100" y1="0" x2="0" y2="100" stroke="#c8c8cf" stroke-width="0.6"/></svg>
+                <div class="lofi-label" id="cImg">[SLIDE IMG: featured_charter_dusk.jpg]</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR COMMITMENTS -->
+    <section class="commit-sec">
+      <div class="wrap-12">
+        <div style="grid-column:1 / 4;"><span class="tag-dot">Our Commitments</span></div>
+        <div style="grid-column:4 / 13;">
+          <h2 style="margin:0 0 16px; font-size:clamp(24px, 3vw, 38px); font-weight:400; line-height:1.15;">Grounded in cooperation. Focused on communities. Fuelled by social innovation. CFOP exists to empower Cieszyn Silesiaâ€™s civic ecosystem today, tomorrow, and for decades to come.</h2>
+          <span class="todo-note" style="background:#333; color:#ddd; border-color:#777;">[TODO: Dark conference banner image]</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT WE DO -->
+    <section class="sec" id="whatSec">
+      <div class="wrap-12">
+        <div style="grid-column:1 / 4;"><span class="tag-dot">What we do</span></div>
+        <div style="grid-column:4 / 8; padding-right:20px;">
+          <h3 id="wTitle" style="margin:0 0 10px; font-size:24px; font-weight:400; line-height:1.18;">Advocacy &amp; operational standards strengthen the voice of every member organization.</h3>
+          <p id="wDesc" class="body-p">Developing cooperation standards, building a credible public image for NGOs, and defending member interests before municipal authorities.</p>
+          <button class="btn-outline" onclick="go('whatwedo')">â†’ More Information</button>
+          <div class="what-tabs">
+            <button class="what-tab active" onclick="pickWhat(0,this)">Advocacy &amp; Standards</button>
+            <button class="what-tab" onclick="pickWhat(1,this)">Cross-Border PLâ€“CZ</button>
+            <button class="what-tab" onclick="pickWhat(2,this)">Social Economy</button>
+            <button class="what-tab" onclick="pickWhat(3,this)">Digital Skills &amp; Training</button>
+            <button class="what-tab" onclick="pickWhat(4,this)">Legislation &amp; Transparency</button>
+          </div>
+        </div>
+        <div style="grid-column:8 / 13;">
+          <div class="lofi-img" style="aspect-ratio:3/4; max-height:440px;">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#c8c8cf" stroke-width="0.6"/><line x1="100" y1="0" x2="0" y2="100" stroke="#c8c8cf" stroke-width="0.6"/></svg>
+            <div class="lofi-label" id="wImg">[3:4 PILLAR SLOT: pillar_1_advocacy.jpg]</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR IMPACT -->
+    <section class="impact-band">
+      <div class="wrap-12">
+        <div style="grid-column:1 / 4;"><span class="tag-dot">Our Impact</span><br><br><span class="todo-note">[Lo-fi KPI blocks]</span></div>
+        <div style="grid-column:4 / 13;">
+          <div class="kpi-grid">
+            <div><div class="kpi-num">48+</div><div class="kpi-desc">Member NGOs &amp; social enterprises united across Cieszyn Silesia.</div></div>
+            <div><div class="kpi-num">12</div><div class="kpi-desc">Years representing non-profit interests (KRS 0000547004).</div></div>
+            <div><div class="kpi-num">2</div><div class="kpi-desc">Border nations bridged daily across Poland and Czechia.</div></div>
+          </div>
+          <hr style="border:none; border-top:1px solid var(--gray-200); margin:24px 0;">
+          <div class="kpi-grid">
+            <div><div class="kpi-num">650+</div><div class="kpi-desc">NGO coordinators &amp; educators trained in capacity labs.</div></div>
+            <div><div class="kpi-num">1.4Mâ‚¬+</div><div class="kpi-desc">Regional &amp; European grant value mobilized for local NGOs.</div></div>
+            <div><div class="kpi-num">100%</div><div class="kpi-desc">Open statutory governance &amp; bilingual PLâ€“CZâ€“EN resources.</div></div>
+          </div>
+          <div style="margin-top:20px;"><button class="btn-outline" onclick="go('docs')">â†’ View All Stats</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLABORATE -->
+    <section class="sec">
+      <div class="wrap-12">
+        <div style="grid-column:1 / 6;">
+          <span class="tag-dot">Join our mission</span>
+          <h3 style="margin:14px 0 0; font-size:36px; font-weight:400; line-height:1.05;">Collaborate<br><span style="color:var(--gray-400);">With Us</span></h3>
+        </div>
+        <div style="grid-column:7 / 13;">
+          <p class="lead-p">Over the years, CFOP has united non-profits, social enterprises, and business partners to strengthen entrepreneurial competences and social innovation.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <button class="btn-dark" onclick="go('membership')">â†’ Get Involved</button>
+            <button class="btn-outline" onclick="go('whatwedo')">â†’ Our Mission</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATION + CLOCKS -->
+    <section class="sec">
+      <div class="wrap-12">
+        <div style="grid-column:1 / 6;">
+          <span class="tag-dot">Location Details</span>
+          <p class="body-p" style="margin-top:12px;">Operating across the Polishâ€“Czech Euroregion of Cieszyn Silesia.</p>
+          <div class="lofi-img" style="width:240px; height:130px; margin-top:14px;">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#c8c8cf" stroke-width="0.6"/><line x1="100" y1="0" x2="0" y2="100" stroke="#c8c8cf" stroke-width="0.6"/></svg>
+            <div class="lofi-label">[HUB CARD SLOT]</div>
+          </div>
+        </div>
+        <div style="grid-column:7 / 13;">
+          <div class="clocks-grid">
+            <div class="clock-item"><div class="clock-city">Cieszyn (PL)</div><div class="clock-time mono" data-tz="Europe/Warsaw">--:--:--</div></div>
+            <div class="clock-item"><div class="clock-city">ÄŒeskÃ½ TÄ›Å¡Ã­n (CZ)</div><div class="clock-time mono" data-tz="Europe/Prague">--:--:--</div></div>
+            <div class="clock-item"><div class="clock-city">KarvinÃ¡ / Ostrava (CZ)</div><div class="clock-time mono" data-tz="Europe/Prague">--:--:--</div></div>
+            <div class="clock-item"><div class="clock-city">Brussels (BE) / Vienna (AT)</div><div class="clock-time mono" data-tz="Europe/Brussels">--:--:--</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- INNER VIEWS -->
+  <main id="view-about" class="view">
+    <section class="sub-head"><div class="wrap-12"><h1>Governance, Mission &amp; Statutory Bodies</h1><p>CFOP â€” KRS 0000547004 Â· NIP 5482668985 Â· ul. WaÅ‚owa 4, 43-400 Cieszyn, Poland</p></div></section>
+    <section class="sec"><div class="wrap-12"><div style="grid-column:1/-1; overflow-x:auto;"><table>
+      <thead><tr><th>Organ</th><th>Role</th><th>Full Name</th></tr></thead>
+      <tbody>
+        <tr><td>Statutory Board</td><td>Chairman</td><td>Petr Kantor</td></tr>
+        <tr><td>Statutory Board</td><td>Vicechairman</td><td>Aleksander GÃ³rny</td></tr>
+        <tr><td>Statutory Board</td><td>Member</td><td>Joanna Brenicka</td></tr>
+        <tr><td>Supervisory Board</td><td>Chairman</td><td>Bartosz Tyrna</td></tr>
+        <tr><td>Supervisory Board</td><td>Member</td><td>Mariusz Waldemar Andrukiewicz</td></tr>
+      </tbody>
+    </table></div></div></section>
+  </main>
+
+  <main id="view-whatwedo" class="view"><section class="sub-head"><div class="wrap-12"><h1>What We Do</h1><p>Five federation pillars across advocacy, social economy, cross-border PLâ€“CZ cooperation, training, and transparency.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1;">01. Cooperation &amp; Standards Â· 02. Social Economy Â· 03. Cross-Border PLâ€“CZ Â· 04. Digital Skills &amp; AI Labs Â· 05. Legislation &amp; Transparency</div></div></section></main>
+  <main id="view-members" class="view"><section class="sub-head"><div class="wrap-12"><h1>Member NGOs &amp; Partners</h1><p>Filterable directory of Polish and Czech member entities.</p></div></section><section class="sec"><div class="wrap-12"><div style="grid-column:1/-1; display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;"><button class="btn-outline active" onclick="filterMem('all',this)">All</button><button class="btn-outline" onclick="filterMem('NGO',this)">NGOs</button><button class="btn-outline" onclick="filterMem('Social Enterprise',this)">Social Enterprises</button><button class="btn-outline" onclick="filterMem('CZ Cross-Border Partner',this)">CZ Partners</button></div><div style="grid-column:1/-1; overflow-x:auto;"><table><thead><tr><th>Organization</th><th>Category</th><th>City</th><th>Activity</th></tr></thead><tbody id="memBody"></tbody></table></div></div></section></main>
+  <main id="view-membership" class="view"><section class="sub-head"><div class="wrap-12"><h1>Become a Federation Member</h1><p>Membership fees and application form.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/6;"><h3>Annual Fee Tiers</h3><p class="body-p">Ordinary NGO: 300 PLN/yr Â· Social Enterprise: 450 PLN/yr Â· Cross-Border Partner: 100 EUR/yr</p></div><div class="box-frame" style="grid-column:7/13;"><h3>Application Form</h3><input placeholder="Organization name" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid var(--gray-200);" /><input placeholder="Contact email" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid var(--gray-200);" /><button class="btn-dark" onclick="alert('Submitted (v0.1)')">â†’ Submit Application</button></div></div></section></main>
+  <main id="view-docs" class="view"><section class="sub-head"><div class="wrap-12"><h1>Documents, Legislation &amp; Impact Data</h1><p>Statutes, reports, and chart placeholders.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1; margin-bottom:16px;"><span class="todo-note">[TODO: SVG Donut &amp; Bar charts]</span></div><div style="grid-column:1/-1; overflow-x:auto;"><table><thead><tr><th>Title</th><th>Category</th><th>Format</th></tr></thead><tbody><tr><td>CFOP Federation Statutes</td><td>Statutes</td><td>PDF Â· 410 kB</td></tr><tr><td>Annual Transparency Report 2025</td><td>Statutes</td><td>PDF Â· 2.2 MB</td></tr></tbody></table></div></div></section></main>
+  <main id="view-events" class="view"><section class="sub-head"><div class="wrap-12"><h1>Events, Workshops &amp; Press Room</h1><p>Upcoming PLâ€“CZ workshops and press assets.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1;">28 Nov 2026 Â· ÄŒeskÃ½ TÄ›Å¡Ã­n â€” PLâ€“CZ NGO Digital &amp; AI Lab</div></div></section></main>
+  <main id="view-portal" class="view"><section class="sub-head"><div class="wrap-12"><h1>Member Area (Extranet)</h1><p>Restricted workspace for CFOP member entities.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/6;"><input placeholder="member@ngo-cieszyn.org" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid var(--gray-200);" /><button class="btn-dark" onclick="alert('Extranet preview (v0.1)')">â†’ Enter Extranet</button></div></div></section></main>
+  <main id="view-contacts" class="view"><section class="sub-head"><div class="wrap-12"><h1>Contacts &amp; Legal Registry</h1><p>ul. WaÅ‚owa 4, 43-400 Cieszyn, Poland Â· cfoppes@gmail.com Â· +48 608 031 289</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1;">KRS: 0000547004 Â· NIP: 5482668985 Â· VAT Payer: No</div></div></section></main>
+
+  <footer class="lofi-footer">
+    <div class="wrap-12">
+      <div style="grid-column:1 / 6;">
+        <strong style="font-size:15px;">CFOP</strong>
+        <p style="font-size:12.5px; color:#aaa; margin:8px 0 0;">ul. WaÅ‚owa 4, 43-400 Cieszyn, Poland<br>cfoppes@gmail.com Â· +48 608 031 289</p>
+      </div>
+      <div class="ft-cols">
+        <div><h4>Navigation</h4><ul><li><a onclick="go('whatwedo')">What We Do</a></li><li><a onclick="go('about')">About &amp; Governance</a></li><li><a onclick="go('members')">Member Directory</a></li><li><a onclick="go('docs')">Docs &amp; Stats</a></li></ul></div>
+        <div><h4>Registry &amp; Access</h4><ul><li>KRS: 0000547004 Â· NIP: 5482668985</li><li><a onclick="go('portal')">Member Extranet</a></li><li><a onclick="go('events')">Events &amp; Press</a></li><li><a onclick="go('contacts')">Contacts</a></li></ul></div>
+      </div>
+      <div style="grid-column:1 / -1; margin-top:32px; padding-top:14px; border-top:1px solid #333; font-size:12px; color:#888; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+        <span>Â© 2026 CFOP â€” Prototype v0.1 (15% Complete)</span>
+        <span class="mono">[Next: Milestone 2 React/Vite Build]</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const I18N_H1 = {
+      en: 'Building Cieszynâ€™s civic future. One NGO, one social enterprise, one partnership at a time.',
+      pl: 'Budujemy przyszÅ‚oÅ›Ä‡ ÅšlÄ…ska CieszyÅ„skiego. Jedna organizacja, jedna inicjatywa spoÅ‚eczna naraz.',
+      cs: 'Budujeme obÄanskou budoucnost TÄ›Å¡Ã­nska. Jedna neziskovka, jeden sociÃ¡lnÃ­ podnik, jedno partnerstvÃ­.'
+    };
+    function setLang(l, btn) {
+      document.querySelectorAll('.lang-box button').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      document.getElementById('heroH1').textContent = I18N_H1[l] || I18N_H1.en;
+    }
+    function go(id) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      const t = document.getElementById('view-' + id);
+      if (t) t.classList.add('active');
+      document.querySelectorAll('#navLinks a').forEach(a => a.classList.toggle('active', a.dataset.v === id));
+      window.scrollTo(0, 0);
+    }
+    const SLIDES = [
+      ['Shaping Cieszynâ€™s Cross-Border Social Economy Charter.', 'Connecting municipal leaders, NGOs, and social enterprises in Cieszyn and ÄŒeskÃ½ TÄ›Å¡Ã­n around shared procurement standards.', 'featured_charter_dusk.jpg'],
+      ['PLâ€“CZ NGO Digital & AI Lab.', 'Practical capacity-building for non-profit coordinators across Cieszyn Silesia.', 'featured_conference_wide.jpg'],
+      ['Cross-Border Civic Forum.', 'Bringing Polish and Czech municipal desks together around shared standards.', 'banner_crossborder_collab.jpg'],
+      ['Open Member Extranet & Partner Network.', 'Shared repository for grant templates, legislative reviews, and board briefs.', 'about_workshop_ngo.jpg']
+    ];
+    let sIdx = 0;
+    function moveSlide(d) {
+      sIdx = (sIdx + d + SLIDES.length) % SLIDES.length;
+      document.getElementById('cCount').textContent = '0' + (sIdx + 1) + ' / 04';
+      document.getElementById('cTitle').textContent = SLIDES[sIdx][0];
+      document.getElementById('cDesc').textContent = SLIDES[sIdx][1];
+      document.getElementById('cImg').textContent = '[SLIDE IMG: ' + SLIDES[sIdx][2] + ']';
+    }
+    const WHAT = [
+      ['Advocacy & operational standards strengthen the voice of every member organization.', 'Developing cooperation standards, building a credible public image for NGOs, and defending member interests.', 'pillar_1_advocacy.jpg'],
+      ['Bridging Polish and Czech communities across the Olza River.', 'Partnering with Czech municipalities and Euroregion bodies on cross-border initiatives.', 'pillar_2_crossborder.jpg'],
+      ['Social entrepreneurship creates sustainable livelihoods and inclusive workplaces.', 'Empowering social cooperatives and inclusive employers across Cieszyn Silesia.', 'pillar_3_social_enterprise.jpg'],
+      ['Practical digital skills and training for non-profit coordinators.', 'AI, grant workflows, and capacity-building labs for local NGO teams.', 'pillar_4_digital_skills.jpg'],
+      ['Transparent governance and legislative monitoring.', 'Open statutes, annual reports, and policy analysis for non-profits.', 'pillar_5_heritage.jpg']
+    ];
+    function pickWhat(i, btn) {
+      document.querySelectorAll('.what-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('wTitle').textContent = WHAT[i][0];
+      document.getElementById('wDesc').textContent = WHAT[i][1];
+      document.getElementById('wImg').textContent = '[3:4 PILLAR SLOT: ' + WHAT[i][2] + ']';
+    }
+    const MEMBERS = [
+      { name: 'Cieszyn NGO Support Hub', cat: 'NGO', city: 'Cieszyn, PL', focus: 'Civic coordination & volunteering' },
+      { name: 'SpÃ³Å‚dzielnia Socjalna Olza', cat: 'Social Enterprise', city: 'Cieszyn, PL', focus: 'Inclusive workshops & hospitality' },
+      { name: 'SlezskÃ© vzdÄ›lÃ¡vacÃ­ centrum s.r.o.', cat: 'CZ Cross-Border Partner', city: 'KarvinÃ¡, CZ', focus: 'Digital skills & adult education' },
+      { name: 'OHK KarvinÃ¡', cat: 'CZ Cross-Border Partner', city: 'ÄŒeskÃ½ TÄ›Å¡Ã­n, CZ', focus: 'Cross-border business & NGO bridge' },
+      { name: 'Pracownia RzemiosÅ‚a i Integracji', cat: 'Social Enterprise', city: 'SkoczÃ³w, PL', focus: 'Craft production & social inclusion' }
+    ];
+    let memF = 'all';
+    function filterMem(c, btn) { memF = c; btn.parentElement.querySelectorAll('.btn-outline').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderMem(); }
+    function renderMem() {
+      const b = document.getElementById('memBody'); if (!b) return;
+      b.innerHTML = MEMBERS.filter(m => memF === 'all' || m.cat === memF)
+        .map(m => `<tr><td><strong>${m.name}</strong></td><td>${m.cat}</td><td>${m.city}</td><td>${m.focus}</td></tr>`).join('');
+    }
+    renderMem();
+    function tick() {
+      const now = new Date();
+      document.querySelectorAll('.clock-time[data-tz]').forEach(el => {
+        try { el.textContent = now.toLocaleTimeString('en-GB', { timeZone: el.dataset.tz, hour12: false }); }
+        catch { el.textContent = now.toLocaleTimeString('en-GB', { hour12: false }); }
+      });
+    }
+    tick(); setInterval(tick, 1000);
+  </script>
+</body>
+</html>
+
