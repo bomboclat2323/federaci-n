@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>[WIP 15%] CFOP â€” Grayscale Layout &amp; Typography Pass v0.1</title>
+  <title>CFOP — Grayscale Structural Wireframe</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -41,7 +41,7 @@
       column-gap: 16px;
     }
 
-    /* WIP 15% Bar */
+    /* Wireframe Status Bar */
     .wip-bar {
       background: #1a1a1a;
       color: #fff;
@@ -259,12 +259,12 @@
 <body>
 
   <div class="wip-bar">
-    <div><span class="wip-tag">WIREFRAME</span> CFOP v0.1 â€” Grayscale Lo-Fi Layout &amp; Manrope Typography Pass (Brand Palette &amp; Media Pending)</div>
-    <div class="mono">Prev: 10% Â· Next: 20%</div>
+    <div><span class="wip-tag">WIREFRAME</span> CFOP v0.1 — Grayscale Lo-Fi Layout &amp; Manrope Typography Pass (Brand Palette &amp; Media Pending)</div>
+    <div class="mono">Next: React/Vite Milestone 2</div>
   </div>
 
   <header class="nav-bar">
-    <a class="nav-brand" onclick="go('home')">CFOP <span class="mono" style="font-weight:400; font-size:11px; color:var(--muted);">[v0.1]</span></a>
+    <a class="nav-brand" onclick="go('home')">CFOP <span class="mono" style="font-weight:400; font-size:11px; color:var(--muted);">[draft]</span></a>
     <nav class="nav-links" id="navLinks">
       <a onclick="go('whatwedo')" data-v="whatwedo">What We Do</a>
       <a onclick="go('about')" data-v="about">About Us</a>
@@ -280,7 +280,7 @@
         <button onclick="setLang('cs',this)">CZ</button>
       </div>
       <button class="btn-outline" onclick="go('portal')">Extranet</button>
-      <button class="btn-dark" onclick="go('membership')">â†’ Get Involved</button>
+      <button class="btn-dark" onclick="go('membership')">→ Get Involved</button>
     </div>
   </header>
 
@@ -295,8 +295,8 @@
         </div>
         <div class="hero-tag"><span class="tag-dot">Welcome</span></div>
         <div class="hero-main">
-          <h1 id="heroH1">Building Cieszynâ€™s civic future. One NGO, one social enterprise, one partnership at a time.</h1>
-          <button class="btn-dark" onclick="document.getElementById('whatSec').scrollIntoView({behavior:'smooth'})">â†’ What We Do</button>
+          <h1 id="heroH1">Building Cieszyn’s civic future. One NGO, one social enterprise, one partnership at a time.</h1>
+          <button class="btn-dark" onclick="document.getElementById('whatSec').scrollIntoView({behavior:'smooth'})">→ What We Do</button>
         </div>
       </div>
     </section>
@@ -311,7 +311,7 @@
         </div>
         <div class="about-right">
           <p class="body-p">Cieszyn Federation of NGOs and Social Economy Entities (CFOP) holds a strong, established role as a regional umbrella organization integrating non-profit entities and social enterprises across Cieszyn Silesia.</p>
-          <p class="body-p">Positioned in the Polishâ€“Czech cross-border ecosystem, CFOP connects civil society, social economy actors, public authorities, and local businesses around entrepreneurship, social innovation, and capacity building.</p>
+          <p class="body-p">Positioned in the Polish–Czech cross-border ecosystem, CFOP connects civil society, social economy actors, public authorities, and local businesses around entrepreneurship, social innovation, and capacity building.</p>
 
           <div class="portraits-row">
             <div>
@@ -319,7 +319,7 @@
                 <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#c8c8cf" stroke-width="0.7"/><line x1="100" y1="0" x2="0" y2="100" stroke="#c8c8cf" stroke-width="0.7"/></svg>
                 <div class="lofi-label">[3:4 PORTRAIT]<br>about_chair_portrait.jpg</div>
               </div>
-              <div class="cap">Petr Kantor â€” Statutory Chairman</div>
+              <div class="cap">Petr Kantor — Statutory Chairman</div>
             </div>
             <div>
               <div class="lofi-img" style="aspect-ratio:3/4;">
@@ -331,7 +331,7 @@
           </div>
 
           <p class="lead-p">Today, that cross-border network operates as a strategic regional hub linking NGOs, social enterprises, educators, and SMEs on both sides of the Olza river.</p>
-          <button class="btn-outline" onclick="go('about')">â†’ Our Story</button>
+          <button class="btn-outline" onclick="go('about')">→ Our Story</button>
         </div>
       </div>
     </section>
@@ -341,17 +341,17 @@
       <div class="wrap-12">
         <div class="box-frame" style="grid-column:1 / -1;">
           <div class="carousel-head">
-            <span class="tag-dot">Featured Initiative Â· <span class="mono" id="cCount" style="margin-left:6px;">01 / 04</span></span>
+            <span class="tag-dot">Featured Initiative · <span class="mono" id="cCount" style="margin-left:6px;">01 / 04</span></span>
             <div style="display:flex; gap:6px;">
-              <button class="btn-outline" onclick="moveSlide(-1)">â€¹ Prev</button>
-              <button class="btn-outline" onclick="moveSlide(1)">Next â€º</button>
+              <button class="btn-outline" onclick="moveSlide(-1)">‹ Prev</button>
+              <button class="btn-outline" onclick="moveSlide(1)">Next ›</button>
             </div>
           </div>
           <div class="wrap-12" style="padding:0; align-items:center;">
             <div style="grid-column:1 / 6;">
-              <h3 id="cTitle" style="margin:0 0 10px; font-size:26px; font-weight:400;">Shaping Cieszynâ€™s Cross-Border Social Economy Charter.</h3>
-              <p id="cDesc" class="body-p">Connecting municipal leaders, NGOs, and social enterprises in Cieszyn and ÄŒeskÃ½ TÄ›Å¡Ã­n around shared procurement standards.</p>
-              <button class="btn-dark" onclick="go('membership')">â†’ Apply Here</button>
+              <h3 id="cTitle" style="margin:0 0 10px; font-size:26px; font-weight:400;">Shaping Cieszyn’s Cross-Border Social Economy Charter.</h3>
+              <p id="cDesc" class="body-p">Connecting municipal leaders, NGOs, and social enterprises in Cieszyn and Český Těšín around shared procurement standards.</p>
+              <button class="btn-dark" onclick="go('membership')">→ Apply Here</button>
             </div>
             <div style="grid-column:7 / 13;">
               <div class="lofi-img" style="height:220px;">
@@ -369,7 +369,7 @@
       <div class="wrap-12">
         <div style="grid-column:1 / 4;"><span class="tag-dot">Our Commitments</span></div>
         <div style="grid-column:4 / 13;">
-          <h2 style="margin:0 0 16px; font-size:clamp(24px, 3vw, 38px); font-weight:400; line-height:1.15;">Grounded in cooperation. Focused on communities. Fuelled by social innovation. CFOP exists to empower Cieszyn Silesiaâ€™s civic ecosystem today, tomorrow, and for decades to come.</h2>
+          <h2 style="margin:0 0 16px; font-size:clamp(24px, 3vw, 38px); font-weight:400; line-height:1.15;">Grounded in cooperation. Focused on communities. Fuelled by social innovation. CFOP exists to empower Cieszyn Silesia’s civic ecosystem today, tomorrow, and for decades to come.</h2>
           <span class="todo-note" style="background:#333; color:#ddd; border-color:#777;">[TODO: Dark conference banner image]</span>
         </div>
       </div>
@@ -382,10 +382,10 @@
         <div style="grid-column:4 / 8; padding-right:20px;">
           <h3 id="wTitle" style="margin:0 0 10px; font-size:24px; font-weight:400; line-height:1.18;">Advocacy &amp; operational standards strengthen the voice of every member organization.</h3>
           <p id="wDesc" class="body-p">Developing cooperation standards, building a credible public image for NGOs, and defending member interests before municipal authorities.</p>
-          <button class="btn-outline" onclick="go('whatwedo')">â†’ More Information</button>
+          <button class="btn-outline" onclick="go('whatwedo')">→ More Information</button>
           <div class="what-tabs">
             <button class="what-tab active" onclick="pickWhat(0,this)">Advocacy &amp; Standards</button>
-            <button class="what-tab" onclick="pickWhat(1,this)">Cross-Border PLâ€“CZ</button>
+            <button class="what-tab" onclick="pickWhat(1,this)">Cross-Border PL–CZ</button>
             <button class="what-tab" onclick="pickWhat(2,this)">Social Economy</button>
             <button class="what-tab" onclick="pickWhat(3,this)">Digital Skills &amp; Training</button>
             <button class="what-tab" onclick="pickWhat(4,this)">Legislation &amp; Transparency</button>
@@ -413,10 +413,10 @@
           <hr style="border:none; border-top:1px solid var(--gray-200); margin:24px 0;">
           <div class="kpi-grid">
             <div><div class="kpi-num">650+</div><div class="kpi-desc">NGO coordinators &amp; educators trained in capacity labs.</div></div>
-            <div><div class="kpi-num">1.4Mâ‚¬+</div><div class="kpi-desc">Regional &amp; European grant value mobilized for local NGOs.</div></div>
-            <div><div class="kpi-num">100%</div><div class="kpi-desc">Open statutory governance &amp; bilingual PLâ€“CZâ€“EN resources.</div></div>
+            <div><div class="kpi-num">1.4M€+</div><div class="kpi-desc">Regional &amp; European grant value mobilized for local NGOs.</div></div>
+            <div><div class="kpi-num">100%</div><div class="kpi-desc">Open statutory governance &amp; bilingual PL–CZ–EN resources.</div></div>
           </div>
-          <div style="margin-top:20px;"><button class="btn-outline" onclick="go('docs')">â†’ View All Stats</button></div>
+          <div style="margin-top:20px;"><button class="btn-outline" onclick="go('docs')">→ View All Stats</button></div>
         </div>
       </div>
     </section>
@@ -431,8 +431,8 @@
         <div style="grid-column:7 / 13;">
           <p class="lead-p">Over the years, CFOP has united non-profits, social enterprises, and business partners to strengthen entrepreneurial competences and social innovation.</p>
           <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <button class="btn-dark" onclick="go('membership')">â†’ Get Involved</button>
-            <button class="btn-outline" onclick="go('whatwedo')">â†’ Our Mission</button>
+            <button class="btn-dark" onclick="go('membership')">→ Get Involved</button>
+            <button class="btn-outline" onclick="go('whatwedo')">→ Our Mission</button>
           </div>
         </div>
       </div>
@@ -443,7 +443,7 @@
       <div class="wrap-12">
         <div style="grid-column:1 / 6;">
           <span class="tag-dot">Location Details</span>
-          <p class="body-p" style="margin-top:12px;">Operating across the Polishâ€“Czech Euroregion of Cieszyn Silesia.</p>
+          <p class="body-p" style="margin-top:12px;">Operating across the Polish–Czech Euroregion of Cieszyn Silesia.</p>
           <div class="lofi-img" style="width:240px; height:130px; margin-top:14px;">
             <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#c8c8cf" stroke-width="0.6"/><line x1="100" y1="0" x2="0" y2="100" stroke="#c8c8cf" stroke-width="0.6"/></svg>
             <div class="lofi-label">[HUB CARD SLOT]</div>
@@ -452,8 +452,8 @@
         <div style="grid-column:7 / 13;">
           <div class="clocks-grid">
             <div class="clock-item"><div class="clock-city">Cieszyn (PL)</div><div class="clock-time mono" data-tz="Europe/Warsaw">--:--:--</div></div>
-            <div class="clock-item"><div class="clock-city">ÄŒeskÃ½ TÄ›Å¡Ã­n (CZ)</div><div class="clock-time mono" data-tz="Europe/Prague">--:--:--</div></div>
-            <div class="clock-item"><div class="clock-city">KarvinÃ¡ / Ostrava (CZ)</div><div class="clock-time mono" data-tz="Europe/Prague">--:--:--</div></div>
+            <div class="clock-item"><div class="clock-city">Český Těšín (CZ)</div><div class="clock-time mono" data-tz="Europe/Prague">--:--:--</div></div>
+            <div class="clock-item"><div class="clock-city">Karviná / Ostrava (CZ)</div><div class="clock-time mono" data-tz="Europe/Prague">--:--:--</div></div>
             <div class="clock-item"><div class="clock-city">Brussels (BE) / Vienna (AT)</div><div class="clock-time mono" data-tz="Europe/Brussels">--:--:--</div></div>
           </div>
         </div>
@@ -463,12 +463,12 @@
 
   <!-- INNER VIEWS -->
   <main id="view-about" class="view">
-    <section class="sub-head"><div class="wrap-12"><h1>Governance, Mission &amp; Statutory Bodies</h1><p>CFOP â€” KRS 0000547004 Â· NIP 5482668985 Â· ul. WaÅ‚owa 4, 43-400 Cieszyn, Poland</p></div></section>
+    <section class="sub-head"><div class="wrap-12"><h1>Governance, Mission &amp; Statutory Bodies</h1><p>CFOP — KRS 0000547004 · NIP 5482668985 · ul. Wałowa 4, 43-400 Cieszyn, Poland</p></div></section>
     <section class="sec"><div class="wrap-12"><div style="grid-column:1/-1; overflow-x:auto;"><table>
       <thead><tr><th>Organ</th><th>Role</th><th>Full Name</th></tr></thead>
       <tbody>
         <tr><td>Statutory Board</td><td>Chairman</td><td>Petr Kantor</td></tr>
-        <tr><td>Statutory Board</td><td>Vicechairman</td><td>Aleksander GÃ³rny</td></tr>
+        <tr><td>Statutory Board</td><td>Vicechairman</td><td>Aleksander Górny</td></tr>
         <tr><td>Statutory Board</td><td>Member</td><td>Joanna Brenicka</td></tr>
         <tr><td>Supervisory Board</td><td>Chairman</td><td>Bartosz Tyrna</td></tr>
         <tr><td>Supervisory Board</td><td>Member</td><td>Mariusz Waldemar Andrukiewicz</td></tr>
@@ -476,26 +476,26 @@
     </table></div></div></section>
   </main>
 
-  <main id="view-whatwedo" class="view"><section class="sub-head"><div class="wrap-12"><h1>What We Do</h1><p>Five federation pillars across advocacy, social economy, cross-border PLâ€“CZ cooperation, training, and transparency.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1;">01. Cooperation &amp; Standards Â· 02. Social Economy Â· 03. Cross-Border PLâ€“CZ Â· 04. Digital Skills &amp; AI Labs Â· 05. Legislation &amp; Transparency</div></div></section></main>
+  <main id="view-whatwedo" class="view"><section class="sub-head"><div class="wrap-12"><h1>What We Do</h1><p>Five federation pillars across advocacy, social economy, cross-border PL–CZ cooperation, training, and transparency.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1;">01. Cooperation &amp; Standards · 02. Social Economy · 03. Cross-Border PL–CZ · 04. Digital Skills &amp; AI Labs · 05. Legislation &amp; Transparency</div></div></section></main>
   <main id="view-members" class="view"><section class="sub-head"><div class="wrap-12"><h1>Member NGOs &amp; Partners</h1><p>Filterable directory of Polish and Czech member entities.</p></div></section><section class="sec"><div class="wrap-12"><div style="grid-column:1/-1; display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;"><button class="btn-outline active" onclick="filterMem('all',this)">All</button><button class="btn-outline" onclick="filterMem('NGO',this)">NGOs</button><button class="btn-outline" onclick="filterMem('Social Enterprise',this)">Social Enterprises</button><button class="btn-outline" onclick="filterMem('CZ Cross-Border Partner',this)">CZ Partners</button></div><div style="grid-column:1/-1; overflow-x:auto;"><table><thead><tr><th>Organization</th><th>Category</th><th>City</th><th>Activity</th></tr></thead><tbody id="memBody"></tbody></table></div></div></section></main>
-  <main id="view-membership" class="view"><section class="sub-head"><div class="wrap-12"><h1>Become a Federation Member</h1><p>Membership fees and application form.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/6;"><h3>Annual Fee Tiers</h3><p class="body-p">Ordinary NGO: 300 PLN/yr Â· Social Enterprise: 450 PLN/yr Â· Cross-Border Partner: 100 EUR/yr</p></div><div class="box-frame" style="grid-column:7/13;"><h3>Application Form</h3><input placeholder="Organization name" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid var(--gray-200);" /><input placeholder="Contact email" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid var(--gray-200);" /><button class="btn-dark" onclick="alert('Submitted (v0.1)')">â†’ Submit Application</button></div></div></section></main>
-  <main id="view-docs" class="view"><section class="sub-head"><div class="wrap-12"><h1>Documents, Legislation &amp; Impact Data</h1><p>Statutes, reports, and chart placeholders.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1; margin-bottom:16px;"><span class="todo-note">[TODO: SVG Donut &amp; Bar charts]</span></div><div style="grid-column:1/-1; overflow-x:auto;"><table><thead><tr><th>Title</th><th>Category</th><th>Format</th></tr></thead><tbody><tr><td>CFOP Federation Statutes</td><td>Statutes</td><td>PDF Â· 410 kB</td></tr><tr><td>Annual Transparency Report 2025</td><td>Statutes</td><td>PDF Â· 2.2 MB</td></tr></tbody></table></div></div></section></main>
-  <main id="view-events" class="view"><section class="sub-head"><div class="wrap-12"><h1>Events, Workshops &amp; Press Room</h1><p>Upcoming PLâ€“CZ workshops and press assets.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1;">28 Nov 2026 Â· ÄŒeskÃ½ TÄ›Å¡Ã­n â€” PLâ€“CZ NGO Digital &amp; AI Lab</div></div></section></main>
-  <main id="view-portal" class="view"><section class="sub-head"><div class="wrap-12"><h1>Member Area (Extranet)</h1><p>Restricted workspace for CFOP member entities.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/6;"><input placeholder="member@ngo-cieszyn.org" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid var(--gray-200);" /><button class="btn-dark" onclick="alert('Extranet preview (v0.1)')">â†’ Enter Extranet</button></div></div></section></main>
-  <main id="view-contacts" class="view"><section class="sub-head"><div class="wrap-12"><h1>Contacts &amp; Legal Registry</h1><p>ul. WaÅ‚owa 4, 43-400 Cieszyn, Poland Â· cfoppes@gmail.com Â· +48 608 031 289</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1;">KRS: 0000547004 Â· NIP: 5482668985 Â· VAT Payer: No</div></div></section></main>
+  <main id="view-membership" class="view"><section class="sub-head"><div class="wrap-12"><h1>Become a Federation Member</h1><p>Membership fees and application form.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/6;"><h3>Annual Fee Tiers</h3><p class="body-p">Ordinary NGO: 300 PLN/yr · Social Enterprise: 450 PLN/yr · Cross-Border Partner: 100 EUR/yr</p></div><div class="box-frame" style="grid-column:7/13;"><h3>Application Form</h3><input placeholder="Organization name" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid var(--gray-200);" /><input placeholder="Contact email" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid var(--gray-200);" /><button class="btn-dark" onclick="alert('Submitted (v0.15)')">→ Submit Application</button></div></div></section></main>
+  <main id="view-docs" class="view"><section class="sub-head"><div class="wrap-12"><h1>Documents, Legislation &amp; Impact Data</h1><p>Statutes, reports, and chart placeholders.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1; margin-bottom:16px;"><span class="todo-note">[TODO: SVG Donut &amp; Bar charts]</span></div><div style="grid-column:1/-1; overflow-x:auto;"><table><thead><tr><th>Title</th><th>Category</th><th>Format</th></tr></thead><tbody><tr><td>CFOP Federation Statutes</td><td>Statutes</td><td>PDF · 410 kB</td></tr><tr><td>Annual Transparency Report 2025</td><td>Statutes</td><td>PDF · 2.2 MB</td></tr></tbody></table></div></div></section></main>
+  <main id="view-events" class="view"><section class="sub-head"><div class="wrap-12"><h1>Events, Workshops &amp; Press Room</h1><p>Upcoming PL–CZ workshops and press assets.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1;">28 Nov 2026 · Český Těšín — PL–CZ NGO Digital &amp; AI Lab</div></div></section></main>
+  <main id="view-portal" class="view"><section class="sub-head"><div class="wrap-12"><h1>Member Area (Extranet)</h1><p>Restricted workspace for CFOP member entities.</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/6;"><input placeholder="member@ngo-cieszyn.org" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid var(--gray-200);" /><button class="btn-dark" onclick="alert('Extranet preview (v0.15)')">→ Enter Extranet</button></div></div></section></main>
+  <main id="view-contacts" class="view"><section class="sub-head"><div class="wrap-12"><h1>Contacts &amp; Legal Registry</h1><p>ul. Wałowa 4, 43-400 Cieszyn, Poland · cfoppes@gmail.com · +48 608 031 289</p></div></section><section class="sec"><div class="wrap-12"><div class="box-frame" style="grid-column:1/-1;">KRS: 0000547004 · NIP: 5482668985 · VAT Payer: No</div></div></section></main>
 
   <footer class="lofi-footer">
     <div class="wrap-12">
       <div style="grid-column:1 / 6;">
         <strong style="font-size:15px;">CFOP</strong>
-        <p style="font-size:12.5px; color:#aaa; margin:8px 0 0;">ul. WaÅ‚owa 4, 43-400 Cieszyn, Poland<br>cfoppes@gmail.com Â· +48 608 031 289</p>
+        <p style="font-size:12.5px; color:#aaa; margin:8px 0 0;">ul. Wałowa 4, 43-400 Cieszyn, Poland<br>cfoppes@gmail.com · +48 608 031 289</p>
       </div>
       <div class="ft-cols">
         <div><h4>Navigation</h4><ul><li><a onclick="go('whatwedo')">What We Do</a></li><li><a onclick="go('about')">About &amp; Governance</a></li><li><a onclick="go('members')">Member Directory</a></li><li><a onclick="go('docs')">Docs &amp; Stats</a></li></ul></div>
-        <div><h4>Registry &amp; Access</h4><ul><li>KRS: 0000547004 Â· NIP: 5482668985</li><li><a onclick="go('portal')">Member Extranet</a></li><li><a onclick="go('events')">Events &amp; Press</a></li><li><a onclick="go('contacts')">Contacts</a></li></ul></div>
+        <div><h4>Registry &amp; Access</h4><ul><li>KRS: 0000547004 · NIP: 5482668985</li><li><a onclick="go('portal')">Member Extranet</a></li><li><a onclick="go('events')">Events &amp; Press</a></li><li><a onclick="go('contacts')">Contacts</a></li></ul></div>
       </div>
       <div style="grid-column:1 / -1; margin-top:32px; padding-top:14px; border-top:1px solid #333; font-size:12px; color:#888; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-        <span>Â© 2026 CFOP â€” Prototype v0.1 (15% Complete)</span>
+        <span>© 2026 CFOP — Structural Wireframe (Stage 1)</span>
         <span class="mono">[Next: Milestone 2 React/Vite Build]</span>
       </div>
     </div>
@@ -503,9 +503,9 @@
 
   <script>
     const I18N_H1 = {
-      en: 'Building Cieszynâ€™s civic future. One NGO, one social enterprise, one partnership at a time.',
-      pl: 'Budujemy przyszÅ‚oÅ›Ä‡ ÅšlÄ…ska CieszyÅ„skiego. Jedna organizacja, jedna inicjatywa spoÅ‚eczna naraz.',
-      cs: 'Budujeme obÄanskou budoucnost TÄ›Å¡Ã­nska. Jedna neziskovka, jeden sociÃ¡lnÃ­ podnik, jedno partnerstvÃ­.'
+      en: 'Building Cieszyn’s civic future. One NGO, one social enterprise, one partnership at a time.',
+      pl: 'Budujemy przyszłość Śląska Cieszyńskiego. Jedna organizacja, jedna inicjatywa społeczna naraz.',
+      cs: 'Budujeme občanskou budoucnost Těšínska. Jedna neziskovka, jeden sociální podnik, jedno partnerství.'
     };
     function setLang(l, btn) {
       document.querySelectorAll('.lang-box button').forEach(b => b.classList.remove('active'));
@@ -520,8 +520,8 @@
       window.scrollTo(0, 0);
     }
     const SLIDES = [
-      ['Shaping Cieszynâ€™s Cross-Border Social Economy Charter.', 'Connecting municipal leaders, NGOs, and social enterprises in Cieszyn and ÄŒeskÃ½ TÄ›Å¡Ã­n around shared procurement standards.', 'featured_charter_dusk.jpg'],
-      ['PLâ€“CZ NGO Digital & AI Lab.', 'Practical capacity-building for non-profit coordinators across Cieszyn Silesia.', 'featured_conference_wide.jpg'],
+      ['Shaping Cieszyn’s Cross-Border Social Economy Charter.', 'Connecting municipal leaders, NGOs, and social enterprises in Cieszyn and Český Těšín around shared procurement standards.', 'featured_charter_dusk.jpg'],
+      ['PL–CZ NGO Digital & AI Lab.', 'Practical capacity-building for non-profit coordinators across Cieszyn Silesia.', 'featured_conference_wide.jpg'],
       ['Cross-Border Civic Forum.', 'Bringing Polish and Czech municipal desks together around shared standards.', 'banner_crossborder_collab.jpg'],
       ['Open Member Extranet & Partner Network.', 'Shared repository for grant templates, legislative reviews, and board briefs.', 'about_workshop_ngo.jpg']
     ];
@@ -549,10 +549,10 @@
     }
     const MEMBERS = [
       { name: 'Cieszyn NGO Support Hub', cat: 'NGO', city: 'Cieszyn, PL', focus: 'Civic coordination & volunteering' },
-      { name: 'SpÃ³Å‚dzielnia Socjalna Olza', cat: 'Social Enterprise', city: 'Cieszyn, PL', focus: 'Inclusive workshops & hospitality' },
-      { name: 'SlezskÃ© vzdÄ›lÃ¡vacÃ­ centrum s.r.o.', cat: 'CZ Cross-Border Partner', city: 'KarvinÃ¡, CZ', focus: 'Digital skills & adult education' },
-      { name: 'OHK KarvinÃ¡', cat: 'CZ Cross-Border Partner', city: 'ÄŒeskÃ½ TÄ›Å¡Ã­n, CZ', focus: 'Cross-border business & NGO bridge' },
-      { name: 'Pracownia RzemiosÅ‚a i Integracji', cat: 'Social Enterprise', city: 'SkoczÃ³w, PL', focus: 'Craft production & social inclusion' }
+      { name: 'Spółdzielnia Socjalna Olza', cat: 'Social Enterprise', city: 'Cieszyn, PL', focus: 'Inclusive workshops & hospitality' },
+      { name: 'Slezské vzdělávací centrum s.r.o.', cat: 'CZ Cross-Border Partner', city: 'Karviná, CZ', focus: 'Digital skills & adult education' },
+      { name: 'OHK Karviná', cat: 'CZ Cross-Border Partner', city: 'Český Těšín, CZ', focus: 'Cross-border business & NGO bridge' },
+      { name: 'Pracownia Rzemiosła i Integracji', cat: 'Social Enterprise', city: 'Skoczów, PL', focus: 'Craft production & social inclusion' }
     ];
     let memF = 'all';
     function filterMem(c, btn) { memF = c; btn.parentElement.querySelectorAll('.btn-outline').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderMem(); }
@@ -573,4 +573,3 @@
   </script>
 </body>
 </html>
-
